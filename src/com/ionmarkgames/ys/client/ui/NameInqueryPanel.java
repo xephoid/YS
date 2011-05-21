@@ -4,6 +4,8 @@ import java.util.Iterator;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -21,6 +23,15 @@ public class NameInqueryPanel extends HorizontalPanel {
 		this.callback = cb;
 		
 		field.setValue("Please enter your name");
+		field.addKeyPressHandler(new KeyPressHandler() {
+			
+			@Override
+			public void onKeyPress(KeyPressEvent event) {
+				if (event.getUnicodeCharCode() == 13) {
+					callback.done(field.getValue());
+				}
+			}
+		});
 		field.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {

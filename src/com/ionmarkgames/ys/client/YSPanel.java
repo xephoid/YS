@@ -10,6 +10,7 @@ import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.ionmarkgames.ys.client.objects.BulletDir;
@@ -23,7 +24,7 @@ import com.ionmarkgames.ys.client.ui.UICallback;
 public class YSPanel extends AbsolutePanel {
     
 	public static final int MAP_WIDTH = 51;
-	public static final int MAP_HEIGHT = 38;
+	public static final int MAP_HEIGHT = 36;
 	
     public static final int TILE_HEIGHT = 20;
     public static final int TILE_WIDTH = 20;
@@ -178,18 +179,7 @@ public class YSPanel extends AbsolutePanel {
             	if (this.enemies.size() < 1) {
             		this.ticker.cancel();
             		this.remove(this.keyHandler);
-            		MessagePanel msg = new MessagePanel("Well done!", new UICallback<Boolean>() {
-						@Override
-						public void done(Boolean obj) {
-							// TODO Auto-generated method stub
-							
-						}
-
-						@Override
-						public void failed() {
-						}
-					});
-            		msg.animate();
+            		this.albertMessage();
             	}
             }
         }
@@ -203,11 +193,23 @@ public class YSPanel extends AbsolutePanel {
         }
     }
 
+    private void albertMessage() {
+    	RootPanel messageSpace = RootPanel.get("MessageArea");
+    	messageSpace.clear();
+    	HTML message = new HTML("Huh?");
+    	message.addStyleName("albert_message");
+    	messageSpace.add(message);
+    }
+
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
 	}
 
 	public String getPlayerName() {
 		return playerName;
+	}
+	
+	public You getPlayer() {
+		return this.player;
 	}
 }

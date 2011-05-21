@@ -34,7 +34,7 @@ public class YS implements EntryPoint, UICallback<String> {
 		gamePanel.setPlayerName(result);
 		playArea.clear();
 		
-		MessagePanel msg = new MessagePanel("Hello there " +gamePanel.getPlayerName()+ " and welcome to the PelCo. initiation home page! <br/><br/>#I will be your handler for the duration of these \"simulations\".  You may call me Broadus.<br/><br/>#I am sure you are eager to begin so lets dive right in.....<br/><br/>#First off you will notice that during the \"simulation\" your avatar will appear as <img src='images/brain.gif' />.<br/><br/>  #We apologize for this crude representation.  <br/>Plans are currently under way to present you as something more appealing.  <br/>Unfortunately due to time and monetary constraints these plans will most likely never come to fruition.", new UICallback<Boolean>() {
+		MessagePanel msg = new MessagePanel("Hello there " +gamePanel.getPlayerName()+ " and welcome to the PelCo initiation home page! <br/><br/>#I will be your handler for the duration of these \"simulations\".  You may call me Broadus.<br/><br/>#I am sure you are eager to begin so lets dive right in.....<br/><br/>#First off you will notice that during the \"simulation\" your avatar will appear as <img src='images/brain.gif' />.<br/><br/>  #We apologize for this crude representation.  <br/>Plans are currently under way to present you as something more appealing.  <br/>Unfortunately due to time and monetary constraints these plans will most likely never come to fruition.", new UICallback<Boolean>() {
 			@Override
 			public void done(Boolean obj) {
 				start();

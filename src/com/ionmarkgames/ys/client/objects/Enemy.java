@@ -21,22 +21,12 @@ public class Enemy extends Sprite {
     
     @Override
     public void act() {
-        if (this.player.getX() == this.getX() && !shooting) {
-            
-        }
-        if (this.player.getY() == this.getY() && !shooting) {
-            
-        }
+    	// no-op
     }
 
     @Override
     public boolean passable() {
         return false;
-    }
-    
-    private void shoot() {
-        this.shooting = true;
-        
     }
     
     @Override
