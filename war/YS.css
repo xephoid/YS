@@ -1,0 +1,38 @@
+body {
+}
+
+#PlayArea {
+    border: 1px solid #333;
+}
+
+#PlayArea .logo_img {
+    width: 100px;
+    position: absolute;
+    left: 920px;
+    top: 725px;
+}
+
+#PlayArea textarea {
+    color: #FFF;
+    border: 0;
+    height: 1px;
+}
+
+#PlayArea .level_1 {
+	background-color: #000;
+}
+
+#MessageArea {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 10;
+	background-color: #fff;
+	width: 1020px;
+}
+
+#MessageArea .broadus_text {
+	margin: 50px 50px 0 50px;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 16px;
+}
