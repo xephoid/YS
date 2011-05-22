@@ -3,6 +3,8 @@ package com.ionmarkgames.ys.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
@@ -30,13 +32,15 @@ public class YSPanel extends AbsolutePanel {
     public static final int TILE_WIDTH = 20;
     private static final int TICKER_TIME = 50;
     
-    private String playerName;
-    
     private List<Sprite> sprites = new ArrayList<Sprite>();
     private List<Enemy> enemies = new ArrayList<Enemy>();
     private Sprite[][] grid;
     private TextArea keyHandler;
     private You player;
+    
+    private GameController control;
+    private String intro;
+    private String albertText;
     
     private Timer ticker = new Timer() {
         @Override
@@ -45,8 +49,9 @@ public class YSPanel extends AbsolutePanel {
         }
     };
     
-    public YSPanel() {
-    	this.addStyleName("level_1");
+    public YSPanel(GameController controller) {
+    	control = controller;
+    	this.addStyleName("level_" + control.getLevel());
         this.keyHandler = new TextArea();
         keyHandler.addKeyDownHandler(new KeyDownHandler() {
             public void onKeyDown(KeyDownEvent event) {
@@ -91,6 +96,9 @@ public class YSPanel extends AbsolutePanel {
     }
     
     public void start() {
+    	
+    	control.loading();
+    	
         this.grid = new Sprite[MAP_WIDTH][MAP_HEIGHT];
         this.generateMap();
         
@@ -103,8 +111,9 @@ public class YSPanel extends AbsolutePanel {
         	this.addSprite(poo);
         }
         
+        control.hidLoading();
         
-        MessagePanel msg = new MessagePanel("You will need to press the <^> keys to navigate the area below.<br/>  We have also equipped you with a basic defense mechanism.  You can direct it using the wasd keys.  Please \"defend\" yourself from the <img src='images/bug.gif' />.", new UICallback<Boolean>() {
+        MessagePanel msg = new MessagePanel(this.intro, new UICallback<Boolean>() {
 			@Override
 			public void failed() {
 			}
@@ -196,20 +205,27 @@ public class YSPanel extends AbsolutePanel {
     private void albertMessage() {
     	RootPanel messageSpace = RootPanel.get("MessageArea");
     	messageSpace.clear();
-    	HTML message = new HTML("Huh?");
+    	HTML message = new HTML(this.albertText);
     	message.addStyleName("albert_message");
+    	message.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				control.nextLevel();
+			}
+		});
     	messageSpace.add(message);
     }
 
-	public void setPlayerName(String playerName) {
-		this.playerName = playerName;
-	}
-
-	public String getPlayerName() {
-		return playerName;
-	}
-	
 	public You getPlayer() {
 		return this.player;
+	}
+
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
+
+	public void setAlbertText(String albertText) {
+		this.albertText = albertText;
 	}
 }
