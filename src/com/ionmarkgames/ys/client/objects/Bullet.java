@@ -1,16 +1,13 @@
 package com.ionmarkgames.ys.client.objects;
 
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.ionmarkgames.ys.client.YSPanel;
 
 public class Bullet extends Sprite {
 
-    private BulletDir direction;
     private int speed = 10;
     private You player;
     
-    public Bullet(YSPanel panel, int x, int y, BulletDir direction) {
+    public Bullet(YSPanel panel, int x, int y, GameDir direction) {
         super(panel, "/images/bullet.gif");
         this.direction = direction;
         this.setLocation(x, y);
@@ -39,19 +36,23 @@ public class Bullet extends Sprite {
                 break;
         }
         
-        if (!this.panel.passable((getX() + deltaX) / YSPanel.TILE_WIDTH, (getY() + deltaY) / YSPanel.TILE_HEIGHT)) {
-        	this.panel.visit(this, (getX() + deltaX) / YSPanel.TILE_WIDTH, (getY() + deltaY) / YSPanel.TILE_HEIGHT);
-            this.panel.removeSprite(this);
-        }
-        
-        double part1 = Math.pow(( (this.player.getX() + 10) - (this.getX() + 10) ), 2);
-		double part2 = Math.pow(( (this.player.getY() + 10) - (this.getY() + 10) ), 2);
+        double part1 = Math.pow(( this.player.getCenterX() - this.getCenterX() ), 2);
+		double part2 = Math.pow(( this.player.getCenterY() - this.getCenterY() ), 2);
 		double underRadical = part1 + part2;
-		if ((int)Math.sqrt(underRadical) / increment > 0) {
+		
+		int futureGridX = (getCenterX() + deltaX) / YSPanel.TILE_WIDTH;
+		int futureGridY = (getCenterY() + deltaY) / YSPanel.TILE_HEIGHT;
+		
+        if (!this.panel.passable(futureGridX, futureGridY)) {
+            this.panel.removeSprite(this);
+        } else if (this.panel.hasEnemy(futureGridX, futureGridY)) {
+        	this.panel.visit(this, futureGridX, futureGridY);
+        	this.panel.removeSprite(this);
+        } else if ((int)Math.sqrt(underRadical) / increment > 0) {
 			this.panel.removeSprite(this);
+		} else {
+			this.setLocation(getX() + deltaX, getY() + deltaY);
 		}
-
-        this.setLocation(getX() + deltaX, getY() + deltaY);
     }
 
     @Override

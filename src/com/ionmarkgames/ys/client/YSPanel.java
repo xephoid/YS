@@ -15,7 +15,7 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
-import com.ionmarkgames.ys.client.objects.BulletDir;
+import com.ionmarkgames.ys.client.objects.GameDir;
 import com.ionmarkgames.ys.client.objects.Enemy;
 import com.ionmarkgames.ys.client.objects.Sprite;
 import com.ionmarkgames.ys.client.objects.Wall;
@@ -24,15 +24,16 @@ import com.ionmarkgames.ys.client.ui.MessagePanel;
 import com.ionmarkgames.ys.client.ui.UICallback;
 
 public class YSPanel extends AbsolutePanel {
-    
-	public static final int MAP_WIDTH = 51;
-	public static final int MAP_HEIGHT = 36;
+	
+	//public static final int MAP_WIDTH = 51;
+	//public static final int MAP_HEIGHT = 36;
 	
     public static final int TILE_HEIGHT = 20;
     public static final int TILE_WIDTH = 20;
     private static final int TICKER_TIME = 50;
     
     private List<Sprite> sprites = new ArrayList<Sprite>();
+    private List<Sprite> toRemove = new ArrayList<Sprite>();
     private List<Enemy> enemies = new ArrayList<Enemy>();
     private Sprite[][] grid;
     private TextArea keyHandler;
@@ -41,6 +42,9 @@ public class YSPanel extends AbsolutePanel {
     private GameController control;
     private String intro;
     private String albertText;
+    
+    private int mapHeight; // Max = 51 
+    private int mapWidth; // Max = 36
     
     private Timer ticker = new Timer() {
         @Override
@@ -76,19 +80,19 @@ public class YSPanel extends AbsolutePanel {
                 switch(event.getCharCode()) {
                     case 'w':
                     case 'W':
-                        player.shoot(BulletDir.UP);
+                        player.shoot(GameDir.UP);
                         break;
                     case 'a':
                     case 'A':
-                        player.shoot(BulletDir.LEFT);
+                        player.shoot(GameDir.LEFT);
                         break;
                     case 's':
                     case 'S':
-                        player.shoot(BulletDir.DOWN);
+                        player.shoot(GameDir.DOWN);
                         break;
                     case 'd':
                     case 'D':
-                        player.shoot(BulletDir.RIGHT);
+                        player.shoot(GameDir.RIGHT);
                         break;
                 }
             }
@@ -99,14 +103,14 @@ public class YSPanel extends AbsolutePanel {
     	
     	control.loading();
     	
-        this.grid = new Sprite[MAP_WIDTH][MAP_HEIGHT];
+        this.grid = new Sprite[this.mapWidth][this.mapHeight];
         this.generateMap();
         
         this.player = new You(this);
         this.visit(player, player.getX() / TILE_WIDTH, player.getY() / TILE_WIDTH);
         
         for (int i = 0; i < 10; i++) {
-        	Enemy poo = new Enemy(this, player);
+        	Enemy poo = control.getLevelEnemy();
         	this.visit(poo, poo.getX() / TILE_WIDTH, poo.getY() / TILE_WIDTH);
         	this.addSprite(poo);
         }
@@ -131,9 +135,32 @@ public class YSPanel extends AbsolutePanel {
     
     public void tick() {
     	keyHandler.getElement().focus();
+    	for (Sprite sprite : this.toRemove) {
+    		if (this.sprites.remove(sprite)) {
+                this.leave(sprite, sprite.getX() / TILE_WIDTH, sprite.getY() / TILE_HEIGHT);
+                sprite.remove();
+                if (sprite.isEnemy()) {
+                	this.enemies.remove((Enemy) sprite);
+                	if (this.enemies.size() < 1) {
+                		this.ticker.cancel();
+                		this.remove(this.keyHandler);
+                		this.albertMessage();
+                	}
+                }
+            }
+    	}
+    	
         for(Sprite sprite : this.sprites) {
-            sprite.act();
+        	if (sprite.isEnemy()) {
+        		this.leave(sprite, sprite.gridX(), sprite.gridY());
+        		sprite.act();
+        		this.visit(sprite, sprite.gridX(), sprite.gridY());
+        	} else {
+        		sprite.act();
+        	}
         }
+        
+        player.act();
     }
     
     private void clearGrid() {
@@ -159,7 +186,7 @@ public class YSPanel extends AbsolutePanel {
     
     private void generateMap() {
         MapBuilder builder = new MapBuilder();
-        boolean[][] map = builder.buildRandomMap(MAP_WIDTH, MAP_HEIGHT);
+        boolean[][] map = builder.buildRandomMap(this.mapWidth, this.mapHeight);
         for (int i = 0; i < map.length; i++) {
         	int len = map[i].length;
             for (int j = 0; j < len; j++) {
@@ -173,25 +200,21 @@ public class YSPanel extends AbsolutePanel {
     }
     
     public boolean passable(int x, int y) {
-        if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT) {
+        if (x < 0 || y < 0 || x >= this.mapWidth || y >= this.mapHeight) {
             return false;
         }
         return this.grid[x][y] == null || this.grid[x][y].passable();
     }
     
+    public boolean hasEnemy(int x, int y) {
+    	if (this.passable(x, y) && this.grid[x][y] != null) {
+    		return this.grid[x][y].isEnemy();
+    	}
+    	return false;
+    }
+    
     public void removeSprite(Sprite sprite) {
-        if (this.sprites.remove(sprite)) {
-            this.leave(sprite, sprite.getX() / TILE_WIDTH, sprite.getY() / TILE_HEIGHT);
-            sprite.remove();
-            if (sprite.isEnemy()) {
-            	this.enemies.remove((Enemy) sprite);
-            	if (this.enemies.size() < 1) {
-            		this.ticker.cancel();
-            		this.remove(this.keyHandler);
-            		this.albertMessage();
-            	}
-            }
-        }
+    	this.toRemove.add(sprite);
     }
     
     public void addSprite(Sprite sprite) {
@@ -227,5 +250,21 @@ public class YSPanel extends AbsolutePanel {
 
 	public void setAlbertText(String albertText) {
 		this.albertText = albertText;
+	}
+
+	public void setMapHeight(int mapHeight) {
+		this.mapHeight = mapHeight;
+	}
+
+	public int getMapHeight() {
+		return mapHeight;
+	}
+
+	public void setMapWidth(int mapWidth) {
+		this.mapWidth = mapWidth;
+	}
+
+	public int getMapWidth() {
+		return mapWidth;
 	}
 }

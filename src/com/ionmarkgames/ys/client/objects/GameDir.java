@@ -1,6 +1,6 @@
 package com.ionmarkgames.ys.client.objects;
 
-public enum BulletDir {
+public enum GameDir {
     UP,
     DOWN,
     LEFT,

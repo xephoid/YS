@@ -5,7 +5,7 @@ import com.ionmarkgames.ys.client.YSPanel;
 public class Wall extends Sprite {
 
     public Wall(YSPanel panel, int x, int y) {
-        super(panel, "images/wall.gif");
+        super(panel, "images/web.gif");
         setLocation(x, y);
     }
     @Override
