@@ -1,8 +1,4 @@
-body {
-}
-
 #PlayArea {
-    border: 1px solid #333;
 }
 
 #PlayArea .logo_img {
@@ -13,7 +9,6 @@ body {
 }
 
 #PlayArea textarea {
-    color: #FFF;
     border: 0;
     height: 1px;
 }
@@ -23,7 +18,15 @@ body {
 }
 
 #PlayArea .level_1 {
+	background-color: #7e4624;
+}
+
+#PlayArea .level_2 {
 	background-color: #808080;
+}
+
+#PlayArea .level_3 {
+	background-color: #000;
 }
 
 #MessageArea {
@@ -57,7 +60,6 @@ body {
 	top: 300px;
 	left: 400px;
 	font-size: 50px;
-	color: blue;
 	z-index: 200;
 	font-weight: 700;
 }

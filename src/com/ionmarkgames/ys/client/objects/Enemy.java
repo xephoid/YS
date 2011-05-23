@@ -75,13 +75,17 @@ public abstract class Enemy extends Sprite {
 			ifMoved = GameDir.DOWN;
 		}
 		
-		int futureGridX = (getCenterX() + deltaX) / YSPanel.TILE_WIDTH;
-		int futureGridY = (getCenterY() + deltaY) / YSPanel.TILE_HEIGHT;
-		
-		if (!this.panel.passable(futureGridX, this.gridY())) {
+		int futureGridX = (getCenterX() + YSPanel.TILE_WIDTH) / YSPanel.TILE_WIDTH;
+		int futureGridY = (getCenterY() + YSPanel.TILE_HEIGHT) / YSPanel.TILE_HEIGHT;
+
+		if (this.gridX() * YSPanel.TILE_WIDTH == this.getX() 
+				&& (!this.panel.passable(futureGridX, this.gridY())
+						|| this.panel.hasEnemy(futureGridX, futureGridY))) {
 			deltaX = 0;
 		}
-		if (!this.panel.passable(gridX(), futureGridY)) {
+		if (this.gridY() * YSPanel.TILE_HEIGHT == this.getY() 
+				&& (!this.panel.passable(gridX(), futureGridY)
+						|| this.panel.hasEnemy(futureGridX, futureGridY))) {
 			deltaY = 0;
 		}
 		
@@ -92,6 +96,74 @@ public abstract class Enemy extends Sprite {
 		
 		return this.getX() == x && this.getY() == y;
 	}
+    
+    protected boolean move(GameDir direction) {
+    	switch(direction) {
+    		case UP:
+    			if (this.gridY() * YSPanel.TILE_HEIGHT == this.getY()) {
+    				if (this.panel.passable(gridX(), (this.gridY() - 1))
+    						&& !this.panel.hasEnemy(gridX(), gridY() - 1)) {
+    					this.setLocation(getX(), getY() - speed);
+    				} else {
+        				return false;
+        			}
+    			} else {
+    				this.setLocation(getX(), getY() - speed);
+    			}
+    			break;
+    		case DOWN:
+    			if (this.gridY() * YSPanel.TILE_HEIGHT == this.getY()) {
+    				if (this.panel.passable(gridX(), (this.gridY() + 1))
+    						&& !panel.hasEnemy(gridX(), gridY() + 1)) {
+    					this.setLocation(getX(), getY() + speed);
+    				} else {
+    					return false;
+    				}
+    			} else {
+    				this.setLocation(getX(), getY() + speed);
+    			}
+    			break;
+    		case RIGHT:
+    			if (this.gridX() * YSPanel.TILE_WIDTH == this.getX()) {
+    				if (this.panel.passable((this.gridX() + 1), gridY())
+    						&& !panel.hasEnemy(gridX() + 1, gridY())) {
+    					this.setLocation(getX() + speed, getY());
+    				} else {
+    					return false;
+    				}
+    			} else {
+    				this.setLocation(getX() + speed, getY());
+    			}
+    			break;
+    		case LEFT:
+    			if (this.gridX() * YSPanel.TILE_WIDTH == this.getX()) {
+    				if (this.panel.passable((this.gridX() - 1), gridY())
+    						&& !panel.hasEnemy(gridX() - 1, gridY())) {
+    					this.setLocation(getX() - speed, getY());
+    				} else {
+    					return false;
+    				}
+    			}  else {
+    				this.setLocation(getX() - speed, getY());
+    			}
+    			break;
+    	}
+    	return true;
+    }
+    
+    public GameDir getRandomDirection() {
+    	int num = (int) (Math.random() * 4);
+    	switch (num) {
+    		case 0:
+    			return GameDir.UP;
+    		case 1:
+    			return GameDir.DOWN;
+    		case 2:
+    			return GameDir.RIGHT;
+    		default:
+    			return GameDir.LEFT;
+    	}
+    }
 
     public boolean isBullet() {
         return false;

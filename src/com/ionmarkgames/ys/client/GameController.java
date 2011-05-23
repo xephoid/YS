@@ -14,7 +14,9 @@ public class GameController {
 	
 	private static final String[] intros = new String[] {
 		"You will need to press the <img src='/images/arrowkeys.gif'/> keys to navigate the area below.<br/>  We have also equipped you with a basic defense mechanism.  You can direct it using the <img src='/images/wasdkeys.gif' /> keys.  Please \"defend\" yourself from the <img src='images/bug.gif' />.",
-		"Good job.  These next pests aren't so passive."
+		"Well done.  You are catching on.  Let's practice some more \"self defense.\"",
+		"Good job, you may notice these are getting a bit trickier.  This is entirely intended.  If at any point you wish to stop feel free to do so.",
+		"Excellent.  You may have questions about what it is your doing right now.  <br/>Rest assured answers may be forthcoming in the near future."
 	};
 	
 	private static final int[][] mapDimensions = new int[][] {
@@ -23,7 +25,20 @@ public class GameController {
 		},
 		new int[] {
 			30, 30
+		},
+		new int[] {
+			30, 30
+		},
+		new int[] {
+			30, 30
 		}
+	};
+	
+	private static final String[] walls = new String[] {
+		"/images/wall.gif",
+		"/images/bush.gif",
+		"/images/web.gif",
+		"/images/grave1.gif"
 	};
 	
 	private static final String[][] albert = new String[][] {
@@ -42,6 +57,22 @@ public class GameController {
 			"Hello?",
 			"I must be dreaming",
 			"Is this real?"	
+		},
+		new String[] {
+			"I don't want to be bothered right now",
+			"It must be nothing",
+			"Please leave",
+			"I'm to busy for this right now",
+			"Don't you have something better to do?",
+			"..."
+		},
+		new String[] {
+			"I don't want to be bothered right now",
+			"It must be nothing",
+			"Please leave",
+			"I'm to busy for this right now",
+			"Don't you have something better to do?",
+			"..."
 		}
 	};
 	
@@ -64,6 +95,7 @@ public class GameController {
 		result.setPixelSize(mapDimensions[this.level][0] * YSPanel.TILE_WIDTH, mapDimensions[this.level][1] * YSPanel.TILE_HEIGHT);
 		result.setMapWidth(mapDimensions[this.level][0]);
 		result.setMapHeight(mapDimensions[this.level][1]);
+		result.setWallImageUrl(walls[level]);
 		
 		playArea.clear();
 		playArea.add(result);

@@ -42,6 +42,7 @@ public class YSPanel extends AbsolutePanel {
     private GameController control;
     private String intro;
     private String albertText;
+    private String wallImageUrl;
     
     private int mapHeight; // Max = 51 
     private int mapWidth; // Max = 36
@@ -135,6 +136,7 @@ public class YSPanel extends AbsolutePanel {
     
     public void tick() {
     	keyHandler.getElement().focus();
+    	player.act();
     	for (Sprite sprite : this.toRemove) {
     		if (this.sprites.remove(sprite)) {
                 this.leave(sprite, sprite.getX() / TILE_WIDTH, sprite.getY() / TILE_HEIGHT);
@@ -159,8 +161,6 @@ public class YSPanel extends AbsolutePanel {
         		sprite.act();
         	}
         }
-        
-        player.act();
     }
     
     private void clearGrid() {
@@ -191,7 +191,7 @@ public class YSPanel extends AbsolutePanel {
         	int len = map[i].length;
             for (int j = 0; j < len; j++) {
                 if (!map[i][j]) {
-                    Sprite wall = new Wall(this, i * TILE_WIDTH, j * TILE_HEIGHT);
+                    Sprite wall = new Wall(this, this.wallImageUrl, i * TILE_WIDTH, j * TILE_HEIGHT);
                     this.sprites.add(wall);
                     this.visit(wall, i, j);
                 }
@@ -230,14 +230,15 @@ public class YSPanel extends AbsolutePanel {
     	messageSpace.clear();
     	HTML message = new HTML(this.albertText);
     	message.addStyleName("albert_message");
-    	message.addClickHandler(new ClickHandler() {
-			
+    	
+    	Timer delay = new Timer() {
 			@Override
-			public void onClick(ClickEvent event) {
+			public void run() {
 				control.nextLevel();
 			}
-		});
+    	};
     	messageSpace.add(message);
+    	delay.schedule(1000);
     }
 
 	public You getPlayer() {
@@ -266,5 +267,9 @@ public class YSPanel extends AbsolutePanel {
 
 	public int getMapWidth() {
 		return mapWidth;
+	}
+
+	public void setWallImageUrl(String wallImageUrl) {
+		this.wallImageUrl = wallImageUrl;
 	}
 }

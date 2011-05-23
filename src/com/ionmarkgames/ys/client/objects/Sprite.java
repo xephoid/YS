@@ -58,11 +58,11 @@ public abstract class Sprite implements Identifiable {
     }
     
     public int gridX() {
-    	return this.getCenterX() / YSPanel.TILE_WIDTH;
+    	return this.getX() / YSPanel.TILE_WIDTH;
     }
     
     public int gridY() {
-    	return this.getCenterY() / YSPanel.TILE_HEIGHT;
+    	return this.getY() / YSPanel.TILE_HEIGHT;
     }
     
     public GameDir getDirection() {
