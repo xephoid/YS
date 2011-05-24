@@ -66,7 +66,6 @@ public class MessagePanel extends VerticalPanel {
 			textIndex++;
 		} else {
 			ok.addClickHandler(new ClickHandler() {
-				@Override
 				public void onClick(ClickEvent event) {
 					ok.setVisible(false);
 					close();

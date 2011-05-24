@@ -3,8 +3,6 @@ package com.ionmarkgames.ys.client;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
@@ -15,8 +13,8 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
-import com.ionmarkgames.ys.client.objects.GameDir;
 import com.ionmarkgames.ys.client.objects.Enemy;
+import com.ionmarkgames.ys.client.objects.GameDir;
 import com.ionmarkgames.ys.client.objects.Sprite;
 import com.ionmarkgames.ys.client.objects.Wall;
 import com.ionmarkgames.ys.client.objects.You;
@@ -119,11 +117,9 @@ public class YSPanel extends AbsolutePanel {
         control.hidLoading();
         
         MessagePanel msg = new MessagePanel(this.intro, new UICallback<Boolean>() {
-			@Override
 			public void failed() {
 			}
 			
-			@Override
 			public void done(Boolean obj) {
 				add(keyHandler);
 				keyHandler.getElement().focus();

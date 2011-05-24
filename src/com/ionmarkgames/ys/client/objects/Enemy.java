@@ -75,8 +75,8 @@ public abstract class Enemy extends Sprite {
 			ifMoved = GameDir.DOWN;
 		}
 		
-		int futureGridX = (getCenterX() + YSPanel.TILE_WIDTH) / YSPanel.TILE_WIDTH;
-		int futureGridY = (getCenterY() + YSPanel.TILE_HEIGHT) / YSPanel.TILE_HEIGHT;
+		int futureGridX = gridX() + 1;
+		int futureGridY = gridY() + 1;
 
 		if (this.gridX() * YSPanel.TILE_WIDTH == this.getX() 
 				&& (!this.panel.passable(futureGridX, this.gridY())
@@ -87,6 +87,15 @@ public abstract class Enemy extends Sprite {
 				&& (!this.panel.passable(gridX(), futureGridY)
 						|| this.panel.hasEnemy(futureGridX, futureGridY))) {
 			deltaY = 0;
+		}
+		
+		if (deltaX != 0 && deltaY != 0) {
+		    if (this.gridX() * YSPanel.TILE_WIDTH == this.getX() && !this.panel.passable(futureGridX, futureGridY)) {
+		        deltaX = 0;
+		    }
+		    if (this.gridY() * YSPanel.TILE_HEIGHT == this.getY() && !this.panel.passable(futureGridX, futureGridY)) {
+		        deltaY = 0;
+		    }
 		}
 		
         if (deltaX != 0 || deltaY != 0) {

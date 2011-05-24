@@ -15,8 +15,8 @@ public class GameController {
 	private static final String[] intros = new String[] {
 		"You will need to press the <img src='/images/arrowkeys.gif'/> keys to navigate the area below.<br/>  We have also equipped you with a basic defense mechanism.  You can direct it using the <img src='/images/wasdkeys.gif' /> keys.  Please \"defend\" yourself from the <img src='images/bug.gif' />.",
 		"Well done.  You are catching on.  Let's practice some more \"self defense.\"",
-		"Good job, you may notice these are getting a bit trickier.  This is entirely intended.  If at any point you wish to stop feel free to do so.",
-		"Excellent.  You may have questions about what it is your doing right now.  <br/>Rest assured answers may be forthcoming in the near future."
+		"Good job, you may notice these are getting a bit trickier.  This is entirely intended.",
+		"Excellent.  You may have questions about what it is your doing right now.  <br/>That is perfectly normal."
 	};
 	
 	private static final int[][] mapDimensions = new int[][] {
@@ -62,7 +62,7 @@ public class GameController {
 			"I don't want to be bothered right now",
 			"It must be nothing",
 			"Please leave",
-			"I'm to busy for this right now",
+			"I'm too busy for this right now",
 			"Don't you have something better to do?",
 			"..."
 		},
