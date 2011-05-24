@@ -57,27 +57,30 @@ public abstract class Enemy extends Sprite {
     	GameDir ifMoved = GameDir.UP;
 		int deltaX = 0;
 		int deltaY = 0;
+		int futureGridX = 0;
+		int futureGridY = 0;
 		
 		if (this.getX() > x) {
 			deltaX = -speed;
 			ifMoved = GameDir.LEFT;
+			futureGridX = gridX() - 1;
 		}
 		if (this.getX() < x) {
 			deltaX = speed;
 			ifMoved = GameDir.RIGHT;
+			futureGridX = gridX() + 1;
 		}
 		if (this.getY() > y) {
 			deltaY = -speed;
 			ifMoved = GameDir.UP;
+			futureGridY = gridY() - 1;
 		}
 		if (this.getY() < y) {
 			deltaY = speed;
 			ifMoved = GameDir.DOWN;
+			futureGridY = gridY() + 1;
 		}
 		
-		int futureGridX = gridX() + 1;
-		int futureGridY = gridY() + 1;
-
 		if (this.gridX() * YSPanel.TILE_WIDTH == this.getX() 
 				&& (!this.panel.passable(futureGridX, this.gridY())
 						|| this.panel.hasEnemy(futureGridX, futureGridY))) {
@@ -90,10 +93,14 @@ public abstract class Enemy extends Sprite {
 		}
 		
 		if (deltaX != 0 && deltaY != 0) {
-		    if (this.gridX() * YSPanel.TILE_WIDTH == this.getX() && !this.panel.passable(futureGridX, futureGridY)) {
+		    if (this.gridX() * YSPanel.TILE_WIDTH == this.getX() 
+		    		&& (!this.panel.passable(futureGridX, futureGridY)
+		    				|| this.panel.hasEnemy(futureGridX, futureGridY))) {
 		        deltaX = 0;
 		    }
-		    if (this.gridY() * YSPanel.TILE_HEIGHT == this.getY() && !this.panel.passable(futureGridX, futureGridY)) {
+		    if (this.gridY() * YSPanel.TILE_HEIGHT == this.getY() 
+		    		&& (!this.panel.passable(futureGridX, futureGridY)
+		    				|| this.panel.hasEnemy(futureGridX, futureGridY))) {
 		        deltaY = 0;
 		    }
 		}

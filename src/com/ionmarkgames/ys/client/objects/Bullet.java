@@ -4,7 +4,7 @@ import com.ionmarkgames.ys.client.YSPanel;
 
 public class Bullet extends Sprite {
 
-    private int speed = 10;
+    private int speed = 20;
     private You player;
     
     public Bullet(YSPanel panel, int x, int y, GameDir direction) {
