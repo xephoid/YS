@@ -10,6 +10,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MessagePanel extends VerticalPanel {
 
+	private static final int TEXT_SPEED = 50; // 75 is average
+	
 	private Boolean tf = true;
 	private Button ok = new Button();
 	private String message;
@@ -35,7 +37,7 @@ public class MessagePanel extends VerticalPanel {
 	}
 	
 	public void animate() {
-		this.textIncrementer.scheduleRepeating(75);
+		this.textIncrementer.scheduleRepeating(TEXT_SPEED);
 	}
 	
 	public void close() {
@@ -64,7 +66,6 @@ public class MessagePanel extends VerticalPanel {
 			textIndex++;
 		} else {
 			ok.addClickHandler(new ClickHandler() {
-				@Override
 				public void onClick(ClickEvent event) {
 					ok.setVisible(false);
 					close();

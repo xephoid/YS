@@ -7,6 +7,7 @@ public abstract class Sprite implements Identifiable {
 
     protected YSPanel panel;
     private Image image;
+    protected GameDir direction = GameDir.UP;
     
     private int x = 0;
     private int y = 0;
@@ -46,6 +47,26 @@ public abstract class Sprite implements Identifiable {
      * @param sprite
      */
     public void visit(Identifiable thing) {
+    }
+    
+    public int getCenterX() {
+    	return this.getX() + (YSPanel.TILE_WIDTH / 2);
+    }
+    
+    public int getCenterY() {
+    	return this.getY() + (YSPanel.TILE_HEIGHT / 2);
+    }
+    
+    public int gridX() {
+    	return this.getX() / YSPanel.TILE_WIDTH;
+    }
+    
+    public int gridY() {
+    	return this.getY() / YSPanel.TILE_HEIGHT;
+    }
+    
+    public GameDir getDirection() {
+    	return this.direction;
     }
     
     public abstract void act();
