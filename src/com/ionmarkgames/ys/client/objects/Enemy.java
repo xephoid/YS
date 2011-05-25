@@ -14,7 +14,7 @@ public abstract class Enemy extends Sprite {
         this.player = player;
         int x = 0;
         int y = 0;
-        while(!this.panel.passable(x, y)) {
+        while(x < 5 || y < 5 || !this.panel.passable(x, y)) {
             x = (int)(Math.random() * panel.getMapWidth());
             y = (int)(Math.random() * panel.getMapHeight());
         }

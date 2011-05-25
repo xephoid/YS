@@ -18,6 +18,7 @@ import com.ionmarkgames.ys.client.objects.GameDir;
 import com.ionmarkgames.ys.client.objects.Sprite;
 import com.ionmarkgames.ys.client.objects.Wall;
 import com.ionmarkgames.ys.client.objects.You;
+import com.ionmarkgames.ys.client.ui.IncreaseStatInquery;
 import com.ionmarkgames.ys.client.ui.MessagePanel;
 import com.ionmarkgames.ys.client.ui.UICallback;
 
@@ -107,16 +108,17 @@ public class YSPanel extends AbsolutePanel {
         
         this.player = new You(this);
         this.visit(player, player.getX() / TILE_WIDTH, player.getY() / TILE_WIDTH);
+        control.updatePlayer(player);
         
-        for (int i = 0; i < 10; i++) {
-        	Enemy poo = control.getLevelEnemy();
-        	this.visit(poo, poo.getX() / TILE_WIDTH, poo.getY() / TILE_WIDTH);
-        	this.addSprite(poo);
-        }
+        this.addEnemies();
         
         control.hidLoading();
         
-        MessagePanel msg = new MessagePanel(this.intro, new UICallback<Boolean>() {
+        this.showIntro();
+    }
+    
+    private void showIntro() {
+    	MessagePanel msg = new MessagePanel(this.intro, new UICallback<Boolean>() {
 			public void failed() {
 			}
 			
@@ -130,41 +132,43 @@ public class YSPanel extends AbsolutePanel {
         msg.animate();
     }
     
-    public void tick() {
-    	keyHandler.getElement().focus();
-    	player.act();
-    	for (Sprite sprite : this.toRemove) {
-    		if (this.sprites.remove(sprite)) {
-                this.leave(sprite, sprite.getX() / TILE_WIDTH, sprite.getY() / TILE_HEIGHT);
-                sprite.remove();
-                if (sprite.isEnemy()) {
-                	this.enemies.remove((Enemy) sprite);
-                	if (this.enemies.size() < 1) {
-                		this.ticker.cancel();
-                		this.remove(this.keyHandler);
-                		this.albertMessage();
-                	}
-                }
-            }
-    	}
-    	
-        for(Sprite sprite : this.sprites) {
-        	if (sprite.isEnemy()) {
-        		this.leave(sprite, sprite.gridX(), sprite.gridY());
-        		sprite.act();
-        		this.visit(sprite, sprite.gridX(), sprite.gridY());
-        	} else {
-        		sprite.act();
-        	}
+    private void addEnemies() {
+    	for (int i = 0; i < 10; i++) {
+        	Enemy poo = control.getLevelEnemy();
+        	this.visit(poo, poo.getX() / TILE_WIDTH, poo.getY() / TILE_WIDTH);
+        	this.addSprite(poo);
         }
     }
     
-    private void clearGrid() {
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                grid[i][j] = null;
-            }
-        }
+    public void tick() {
+    	try {
+    		keyHandler.getElement().focus();
+    		player.act();
+    		for (Sprite sprite : this.toRemove) {
+    			if (this.sprites.remove(sprite)) {
+    				this.leave(sprite, sprite.getX() / TILE_WIDTH, sprite.getY() / TILE_HEIGHT);
+    				sprite.remove();
+    				if (sprite.isEnemy()) {
+    					this.enemies.remove((Enemy) sprite);
+    					if (this.enemies.size() < 1) {
+    						this.endLevel();
+    					}
+    				}
+    			}
+    		}
+    	
+    		for(Sprite sprite : this.sprites) {
+    			if (sprite.isEnemy()) {
+    				this.leave(sprite, sprite.gridX(), sprite.gridY());
+    				sprite.act();
+    				this.visit(sprite, sprite.gridX(), sprite.gridY());
+    			} else {
+    				sprite.act();
+    			}
+    		}
+    	} catch (RestartException e) {
+    		this.resetLevel();
+    	}
     }
     
     public boolean visit(Sprite sprite, int x, int y) {
@@ -220,7 +224,7 @@ public class YSPanel extends AbsolutePanel {
         	this.enemies.add(enemy);
         }
     }
-
+    
     private void albertMessage() {
     	RootPanel messageSpace = RootPanel.get("MessageArea");
     	messageSpace.clear();
@@ -235,6 +239,51 @@ public class YSPanel extends AbsolutePanel {
     	};
     	messageSpace.add(message);
     	delay.schedule(1000);
+    }
+    
+    private void endLevel() {
+    	this.ticker.cancel();
+		this.remove(this.keyHandler);
+		
+		IncreaseStatInquery inquery = new IncreaseStatInquery(player, new UICallback<Integer>() {
+
+			@Override
+			public void done(Integer obj) {
+				control.persistPlayer(player);
+				albertMessage();
+			}
+
+			@Override
+			public void failed() {
+			}
+			
+		});
+		inquery.show();
+    }
+    
+    private void resetLevel() {
+    	// Clear up
+    	this.ticker.cancel();
+		this.remove(this.keyHandler);
+		
+		for (Sprite sprite : this.sprites) {
+			if (sprite.isEnemy() || sprite.isBullet()) {
+				this.leave(sprite, sprite.getX() / TILE_WIDTH, sprite.getY() / TILE_HEIGHT);
+				sprite.remove();
+			}
+		}
+		this.enemies.clear();
+		
+		this.leave(player, player.gridX(), player.gridY());
+		player.remove();
+		
+		// Rebuild
+		player = new You(this);
+		control.updatePlayer(player);
+		
+		this.addEnemies();
+		
+		this.showIntro();
     }
 
 	public You getPlayer() {

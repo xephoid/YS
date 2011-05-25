@@ -16,23 +16,37 @@ public class Bullet extends Sprite {
     
     @Override
     public void act() {
+    	if (this.panel.hasEnemy(gridX(), gridY())) {
+        	this.panel.visit(this, gridX(), gridY());
+        	this.panel.removeSprite(this);
+        	return;
+        }
+    	
         int deltaX = 0;
         int deltaY = 0;
+        
+        int futureGridX = gridX();
+		int futureGridY = gridY();
+		
         int increment = YSPanel.TILE_WIDTH;
         switch(this.direction) {
             case DOWN:
                 deltaY = speed;
                 increment = YSPanel.TILE_HEIGHT;
+                futureGridY = gridY() + 1;
                 break;
             case UP:
                 deltaY = -speed;
                 increment = YSPanel.TILE_HEIGHT;
+                futureGridY = gridY() - 1;
                 break;
             case RIGHT:
                 deltaX = speed;
+                futureGridX = gridX() + 1;
                 break;
             case LEFT:
                 deltaX = -speed;
+                futureGridX = gridX() - 1;
                 break;
         }
         
@@ -40,15 +54,9 @@ public class Bullet extends Sprite {
 		double part2 = Math.pow(( this.player.getCenterY() - this.getCenterY() ), 2);
 		double underRadical = part1 + part2;
 		
-		int futureGridX = (getCenterX() + deltaX) / YSPanel.TILE_WIDTH;
-		int futureGridY = (getCenterY() + deltaY) / YSPanel.TILE_HEIGHT;
-		
         if (!this.panel.passable(futureGridX, futureGridY)) {
             this.panel.removeSprite(this);
-        } else if (this.panel.hasEnemy(futureGridX, futureGridY)) {
-        	this.panel.visit(this, futureGridX, futureGridY);
-        	this.panel.removeSprite(this);
-        } else if ((int)Math.sqrt(underRadical) / increment > 0) {
+        } else if ((int)Math.sqrt(underRadical) / increment > player.getRange() - 1) {
 			this.panel.removeSprite(this);
 		} else {
 			this.setLocation(getX() + deltaX, getY() + deltaY);

@@ -1,6 +1,7 @@
 package com.ionmarkgames.ys.client.objects;
 
 import com.google.gwt.user.client.ui.Image;
+import com.ionmarkgames.ys.client.RestartException;
 import com.ionmarkgames.ys.client.YSPanel;
 
 public abstract class Sprite implements Identifiable {
@@ -69,6 +70,6 @@ public abstract class Sprite implements Identifiable {
     	return this.direction;
     }
     
-    public abstract void act();
+    public abstract void act() throws RestartException;
     public abstract boolean passable();
 }

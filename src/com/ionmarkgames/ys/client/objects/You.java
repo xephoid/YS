@@ -1,13 +1,15 @@
 package com.ionmarkgames.ys.client.objects;
 
+import com.ionmarkgames.ys.client.RestartException;
 import com.ionmarkgames.ys.client.YSPanel;
 
 public class You extends Sprite {
 	
-	private int power = 1;
-	private int range = 1;
-	private int health = 1;
+	private int power;
+	private int range;
+	private int health;
 	private int damage = 0;
+	private int maxHealth;
 	private GameDir damageDir;
 
     public You(YSPanel panel) {
@@ -19,7 +21,7 @@ public class You extends Sprite {
     }
     
     @Override
-    public void act() {
+    public void act() throws RestartException {
     	if (this.damage > 0) {
     		this.health -= this.damage;
     		switch(this.damageDir) {
@@ -38,7 +40,7 @@ public class You extends Sprite {
     		}
     		
     		if (this.health < 1) {
-    			// TODO: restart level
+    			throw new RestartException();
     		}
     		
     		this.damage = 0;
@@ -142,5 +144,17 @@ public class You extends Sprite {
 
 	public int getHealth() {
 		return health;
+	}
+
+	public void setMaxHealth(int maxHealth) {
+		this.maxHealth = maxHealth;
+	}
+
+	public int getMaxHealth() {
+		return maxHealth;
+	}
+	
+	public void resetHealth() {
+		this.health = this.maxHealth;
 	}
 }

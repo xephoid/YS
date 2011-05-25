@@ -2,6 +2,7 @@ package com.ionmarkgames.ys.client;
 
 import com.google.gwt.user.client.ui.RootPanel;
 import com.ionmarkgames.ys.client.objects.Enemy;
+import com.ionmarkgames.ys.client.objects.You;
 
 public class GameController {
 
@@ -11,6 +12,10 @@ public class GameController {
 	private RootPanel playArea = RootPanel.get("PlayArea");
 	private YSPanel currentPanel;
 	private EnemyFactory enemyFactory;
+	
+	private int playerPower = 1;
+	private int playerRange = 1;
+	private int playerHealth = 1;
 	
 	private static final String[] intros = new String[] {
 		"You will need to press the <img src='/images/arrowkeys.gif'/> keys to navigate the area below.<br/>  We have also equipped you with a basic defense mechanism.  You can direct it using the <img src='/images/wasdkeys.gif' /> keys.  Please \"defend\" yourself from the <img src='images/bug.gif' />.",
@@ -107,6 +112,19 @@ public class GameController {
 		
 		this.currentPanel = result;
 		result.start();
+	}
+	
+	public void persistPlayer(You player) {
+		this.playerPower = player.getPower();
+		this.playerRange = player.getRange();
+		this.playerHealth = player.getMaxHealth();
+	}
+	
+	public void updatePlayer(You player) {
+		player.setPower(this.playerPower);
+		player.setRange(this.playerRange);
+		player.setMaxHealth(this.playerHealth);
+		player.resetHealth();
 	}
 	
 	public void loading() {
