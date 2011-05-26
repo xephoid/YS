@@ -6,6 +6,7 @@ import com.ionmarkgames.ys.client.objects.enemies.Bug;
 import com.ionmarkgames.ys.client.objects.enemies.Clown;
 import com.ionmarkgames.ys.client.objects.enemies.Coin;
 import com.ionmarkgames.ys.client.objects.enemies.Ghost;
+import com.ionmarkgames.ys.client.objects.enemies.Lips;
 import com.ionmarkgames.ys.client.objects.enemies.Person;
 import com.ionmarkgames.ys.client.objects.enemies.Snake;
 import com.ionmarkgames.ys.client.objects.enemies.Spider;
@@ -39,6 +40,8 @@ public class EnemyFactory {
 				return new Tornado(panel, player);
 			case 7:
 				return new Coin(panel, player);
+			case 8:
+			    return new Lips(panel, player);
 		}
 		return null;
 	}
