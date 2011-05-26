@@ -82,27 +82,32 @@ public abstract class Enemy extends Sprite {
 		}
 		
 		if (this.gridX() * YSPanel.TILE_WIDTH == this.getX() 
-				&& (!this.panel.passable(futureGridX, this.gridY())
-						|| this.panel.hasEnemy(futureGridX, futureGridY))) {
+				&& !this.panel.passable(futureGridX, this.gridY())) {
 			deltaX = 0;
+			futureGridX = gridX();
 		}
 		if (this.gridY() * YSPanel.TILE_HEIGHT == this.getY() 
-				&& (!this.panel.passable(gridX(), futureGridY)
-						|| this.panel.hasEnemy(futureGridX, futureGridY))) {
+				&& !this.panel.passable(gridX(), futureGridY)) {
 			deltaY = 0;
+			futureGridY = gridY();
 		}
 		
 		if (deltaX != 0 && deltaY != 0) {
 		    if (this.gridX() * YSPanel.TILE_WIDTH == this.getX() 
-		    		&& (!this.panel.passable(futureGridX, futureGridY)
-		    				|| this.panel.hasEnemy(futureGridX, futureGridY))) {
+		    		&& !this.panel.passable(futureGridX, futureGridY)) {
 		        deltaX = 0;
+		        futureGridX = gridX();
 		    }
 		    if (this.gridY() * YSPanel.TILE_HEIGHT == this.getY() 
-		    		&& (!this.panel.passable(futureGridX, futureGridY)
-		    				|| this.panel.hasEnemy(futureGridX, futureGridY))) {
+		    		&& !this.panel.passable(futureGridX, futureGridY)) {
 		        deltaY = 0;
+		        futureGridY = gridY();
 		    }
+		}
+		
+		if (this.panel.hasEnemy(futureGridX, futureGridY)) {
+		    deltaX = 0;
+		    deltaY = 0;
 		}
 		
         if (deltaX != 0 || deltaY != 0) {

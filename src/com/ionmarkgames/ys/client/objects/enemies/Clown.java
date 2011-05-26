@@ -28,7 +28,7 @@ public class Clown extends Enemy {
                 if (this.wait > this.waitMax) {
                     this.freaking = false;
                     this.wait = 0;
-                    this.waitMax = (int) (Math.random() * 100);
+                    this.waitMax = (int) (Math.random() * 10) * 10;
                 }
             }
             this.move(this.direction);
@@ -37,7 +37,7 @@ public class Clown extends Enemy {
             if (this.wait >= this.waitMax) {
                 this.freaking = true;
                 this.wait = 0;
-                this.waitMax = 15;
+                this.waitMax = 20;
             }
         }
     }

@@ -42,6 +42,7 @@ public class YSPanel extends AbsolutePanel {
     private String intro;
     private String albertText;
     private String wallImageUrl;
+    private int maxEnemies = 10;
     
     private int mapHeight; // Max = 51 
     private int mapWidth; // Max = 36
@@ -316,4 +317,12 @@ public class YSPanel extends AbsolutePanel {
 	public void setWallImageUrl(String wallImageUrl) {
 		this.wallImageUrl = wallImageUrl;
 	}
+
+    public void setMaxEnemies(int maxEnemies) {
+        this.maxEnemies = maxEnemies;
+    }
+
+    public int getMaxEnemies() {
+        return maxEnemies;
+    }
 }
