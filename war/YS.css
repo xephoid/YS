@@ -35,6 +35,14 @@
 	background-color: #000;
 }
 
+#PlayArea .level_5 {
+	background-color: #308313;
+}
+
+#PlayArea .level_6 {
+	background-color: #ecc14e;
+}
+
 #MessageArea {
 	position: absolute;
 	top: 0px;

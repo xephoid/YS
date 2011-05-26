@@ -21,8 +21,11 @@ public class GameController {
 		"You will need to press the <img src='/images/arrowkeys.gif'/> keys to navigate the area below.<br/>  We have also equipped you with a basic defense mechanism.  You can direct it using the <img src='/images/wasdkeys.gif' /> keys.  Please \"defend\" yourself from the <img src='images/bug.gif' />.",
 		"Well done.  You are catching on.  Let's practice some more \"self defense.\"",
 		"Good job, you may notice these are getting a bit trickier.  This is entirely intended.",
-		"Excellent.  You may have questions about what it is your doing right now.  For legal reasons we have chosen not to tell you.",
-		"In this next area keep in mind some obsticals in the \"simulation\" may take more time to overcome."
+		"Excellent.  You might have questions about what it is you are doing right now.  For legal reasons we have chosen not to tell you.",
+		"In this next area, keep in mind some obsticals in the \"simulation\" may take more time to overcome.",
+		"Please note: as a side effect of these \"simulations\" you may come under the suspicion that someone else is in here with you.  We assure you that nothing this individual may say is of any importance to you.",
+		"You got through that last one in less than optimal time.  We sugguest trying a little harder.",
+		"...I am not sure there is a nice way to say this.  That was the slowest I have ever seen someone do that.  Let's try an easier one."
 	};
 	
 	private static final int[][] mapDimensions = new int[][] {
@@ -41,6 +44,15 @@ public class GameController {
 		new int[] { // Level 5
 		    30, 30
 	    },
+	    new int[] { // Level 6
+			51, 30
+		},
+		new int[] { // Level 7
+			51, 30
+		},
+		new int[] { // Level 8
+			51, 30
+		}
 	};
 	
 	private static final String[] walls = new String[] {
@@ -48,7 +60,10 @@ public class GameController {
 		"/images/bush.gif",
 		"/images/web.gif",
 		"/images/grave1.gif",
-		"/images/circus.gif"
+		"/images/circus.gif",
+		"/images/eye.gif",
+		"/images/house.gif",
+		"/images/gold.gif"
 	};
 	
 	private static final String[][] albert = new String[][] {
@@ -68,7 +83,7 @@ public class GameController {
 			"Please leave.",
 		},
 		new String[] { // 4. Isolation
-			"I'm to busy for this right now.",
+			"I'm too busy for this right now.",
 			"Don't you have something better to do?",
 			"..."
 		},
@@ -86,7 +101,17 @@ public class GameController {
 	        "What is your problem?",
 	        "I HATE YOU!",
 	        "This is stupid."
-	    }
+	    },
+	    new String[] { // 8. Bargaining
+			"What do you want from me?",
+			"I'll give you what you want if you stop.",
+			"Stop and I will give you whatever you want",
+		},
+		new String[] { // 9. Bargaining
+			"Do you want money?",
+			"What do I have that you want?",
+			"Tell me what you want."
+		}
 	};
 	
 	public GameController() {

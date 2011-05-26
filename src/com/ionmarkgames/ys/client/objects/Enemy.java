@@ -57,8 +57,8 @@ public abstract class Enemy extends Sprite {
     	GameDir ifMoved = GameDir.UP;
 		int deltaX = 0;
 		int deltaY = 0;
-		int futureGridX = 0;
-		int futureGridY = 0;
+		int futureGridX = gridX();
+		int futureGridY = gridY();
 		
 		if (this.getX() > x) {
 			deltaX = -speed;
