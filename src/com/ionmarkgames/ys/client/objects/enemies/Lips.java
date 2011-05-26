@@ -24,7 +24,7 @@ public class Lips extends Enemy {
         if (wander < 1 && !this.moveTowardsTarget(player.getX(), player.getY())) {
             wander = 8;
         } else {
-            if (!this.move(direction)) {
+            if (!this.move(direction) ) {
                 this.direction = this.getRandomDirection();
             } else {
                 wander--;

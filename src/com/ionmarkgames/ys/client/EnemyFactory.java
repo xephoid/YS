@@ -2,6 +2,7 @@ package com.ionmarkgames.ys.client;
 
 import com.ionmarkgames.ys.client.objects.Enemy;
 import com.ionmarkgames.ys.client.objects.You;
+import com.ionmarkgames.ys.client.objects.enemies.Bug;
 import com.ionmarkgames.ys.client.objects.enemies.Clown;
 import com.ionmarkgames.ys.client.objects.enemies.Coin;
 import com.ionmarkgames.ys.client.objects.enemies.Ghost;
@@ -24,7 +25,7 @@ public class EnemyFactory {
 		You player = panel.getPlayer();
 		switch (controller.getLevel()) {
 			case 0: // entomophobia
-				return new Lips(panel, player);
+				return new Bug(panel, player);
 			case 1: // ophidiophobia
 				return new Snake(panel, player);
 			case 2: // arachnophobia
