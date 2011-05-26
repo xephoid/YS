@@ -33,7 +33,6 @@ public class IncreaseStatInquery {
 		
 		power.addClickHandler(new ClickHandler() {
 			
-			@Override
 			public void onClick(ClickEvent event) {
 				player.setPower(player.getPower() + 1);
 				hide();
@@ -42,7 +41,6 @@ public class IncreaseStatInquery {
 		
 		range.addClickHandler(new ClickHandler() {
 			
-			@Override
 			public void onClick(ClickEvent event) {
 				player.setRange(player.getRange() + 1);
 				hide();
@@ -51,7 +49,6 @@ public class IncreaseStatInquery {
 		
 		health.addClickHandler(new ClickHandler() {
 			
-			@Override
 			public void onClick(ClickEvent event) {
 				player.setMaxHealth(player.getMaxHealth() + 1);
 				hide();

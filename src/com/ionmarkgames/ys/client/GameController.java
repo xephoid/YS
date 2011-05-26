@@ -21,64 +21,72 @@ public class GameController {
 		"You will need to press the <img src='/images/arrowkeys.gif'/> keys to navigate the area below.<br/>  We have also equipped you with a basic defense mechanism.  You can direct it using the <img src='/images/wasdkeys.gif' /> keys.  Please \"defend\" yourself from the <img src='images/bug.gif' />.",
 		"Well done.  You are catching on.  Let's practice some more \"self defense.\"",
 		"Good job, you may notice these are getting a bit trickier.  This is entirely intended.",
-		"Excellent.  You may have questions about what it is your doing right now.  For legal reasons we have chosen not to tell you."
+		"Excellent.  You may have questions about what it is your doing right now.  For legal reasons we have chosen not to tell you.",
+		"In this next area keep in mind some obsticals in the \"simulation\" may take more time to overcome."
 	};
 	
 	private static final int[][] mapDimensions = new int[][] {
-		new int[] {
+		new int[] { // Level 1
 			21,21
 		},
-		new int[] {
+		new int[] { // Level 2
 			30, 30
 		},
-		new int[] {
+		new int[] { // Level 3
 			30, 30
 		},
-		new int[] {
+		new int[] { // Level 4
 			30, 30
-		}
+		},
+		new int[] { // Level 5
+		    30, 30
+	    },
 	};
 	
 	private static final String[] walls = new String[] {
 		"/images/wall.gif",
 		"/images/bush.gif",
 		"/images/web.gif",
-		"/images/grave1.gif"
+		"/images/grave1.gif",
+		"/images/circus.gif"
 	};
 	
 	private static final String[][] albert = new String[][] {
-		new String[] {
+		new String[] {  // 1. Denial
 		    "What is this?",
 			"Huh?",
-			"This can't be right",
-			"Hello?",
-			"I must be dreaming",
-			"Is this real?"
+			"This can't be right.",
 		},
-		new String[] {
-			"What is this?",
-			"Huh?",
-			"This can't be right",
+		new String[] { // 2. Denial
 			"Hello?",
-			"I must be dreaming",
+			"I must be dreaming.",
 			"Is this real?"	
 		},
-		new String[] {
-			"I don't want to be bothered right now",
-			"It must be nothing",
-			"Please leave",
-			"I'm too busy for this right now",
+		new String[] { // 3. Isolation
+			"I don't want to be bothered right now.",
+			"It must be nothing.",
+			"Please leave.",
+		},
+		new String[] { // 4. Isolation
+			"I'm to busy for this right now.",
 			"Don't you have something better to do?",
 			"..."
 		},
-		new String[] {
-			"I don't want to be bothered right now",
-			"It must be nothing",
-			"Please leave",
-			"I'm to busy for this right now",
-			"Don't you have something better to do?",
-			"..."
-		}
+		new String[] { // 5. Anger
+		    "Are you listening to me?",
+		    "STOP!",
+		    "Go away.",
+		},
+        new String[] { // 6. Anger 
+	        "LEAVE ME ALONE!",
+	        "Stop or else.",
+	        "YOU SUCK!",
+		},
+        new String[] { // 7. Anger
+	        "What is your problem?",
+	        "I HATE YOU!",
+	        "This is stupid."
+	    }
 	};
 	
 	public GameController() {

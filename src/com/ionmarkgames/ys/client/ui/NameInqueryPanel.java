@@ -4,6 +4,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -24,7 +25,7 @@ public class NameInqueryPanel extends HorizontalPanel {
 			
 			public void onKeyPress(KeyPressEvent event) {
 				if (event.getUnicodeCharCode() == 13) {
-					callback.done(field.getValue());
+					callback.done(SafeHtmlUtils.htmlEscape(field.getValue()));
 				}
 			}
 		});
@@ -36,7 +37,7 @@ public class NameInqueryPanel extends HorizontalPanel {
 		button.setText("Submit");
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				callback.done(field.getValue());
+			    callback.done(SafeHtmlUtils.htmlEscape(field.getValue()));
 			}
 		});
 		

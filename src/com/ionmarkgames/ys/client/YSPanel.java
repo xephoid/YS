@@ -247,13 +247,11 @@ public class YSPanel extends AbsolutePanel {
 		
 		IncreaseStatInquery inquery = new IncreaseStatInquery(player, new UICallback<Integer>() {
 
-			@Override
 			public void done(Integer obj) {
 				control.persistPlayer(player);
 				albertMessage();
 			}
 
-			@Override
 			public void failed() {
 			}
 			
@@ -270,6 +268,7 @@ public class YSPanel extends AbsolutePanel {
 			if (sprite.isEnemy() || sprite.isBullet()) {
 				this.leave(sprite, sprite.getX() / TILE_WIDTH, sprite.getY() / TILE_HEIGHT);
 				sprite.remove();
+				this.toRemove.add(sprite);
 			}
 		}
 		this.enemies.clear();

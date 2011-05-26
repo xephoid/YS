@@ -1,4 +1,5 @@
 #PlayArea {
+    z-index: 10;
 }
 
 #PlayArea .logo_img {
@@ -11,6 +12,7 @@
 #PlayArea textarea {
     border: 0;
     height: 1px;
+    z-index: 0;
 }
 
 #PlayArea .level_0 {
@@ -26,6 +28,10 @@
 }
 
 #PlayArea .level_3 {
+	background-color: #000;
+}
+
+#PlayArea .level_4 {
 	background-color: #000;
 }
 
@@ -53,6 +59,10 @@
 	background-color: black;
 	color: gray;
 	padding-top: 300px;
+}
+
+#MessageArea .ok_button {
+    margin-left: 50px;
 }
 
 #Loading {

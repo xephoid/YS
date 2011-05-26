@@ -30,6 +30,7 @@ public class MessagePanel extends VerticalPanel {
 		this.message = msg;
 		this.callback = cb;
 		ok.setText("OK");
+		ok.addStyleName("ok_button");
 		content.addStyleName("broadus_text");
 		this.add(content);
 		RootPanel.get("MessageArea").clear();
