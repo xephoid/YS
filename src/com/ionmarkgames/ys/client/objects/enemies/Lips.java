@@ -10,7 +10,7 @@ public class Lips extends Enemy {
     private int wander = 0;
     
     public Lips(YSPanel panel, You player) {
-        super(panel, player, "lips.gif");
+        super(panel, player, "/images/kiss.gif");
         
         this.speed = 5;
         this.power = 2;
