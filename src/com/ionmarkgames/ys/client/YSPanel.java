@@ -32,6 +32,7 @@ public class YSPanel extends AbsolutePanel {
     private static final int TICKER_TIME = 50;
     
     private List<Sprite> sprites = new ArrayList<Sprite>();
+    private List<Sprite> toAdd = new ArrayList<Sprite>();
     private List<Sprite> toRemove = new ArrayList<Sprite>();
     private List<Enemy> enemies = new ArrayList<Enemy>();
     private Sprite[][] grid;
@@ -144,7 +145,18 @@ public class YSPanel extends AbsolutePanel {
     public void tick() {
     	try {
     		keyHandler.getElement().focus();
+    		
     		player.act();
+    		
+    		for (Sprite sprite : toAdd) {
+                this.sprites.add(sprite);
+                if (sprite.isEnemy()) {
+                    Enemy enemy = (Enemy) sprite;
+                    this.enemies.add(enemy);
+                }
+            }
+            this.toAdd.clear();
+    		
     		for (Sprite sprite : this.toRemove) {
     			if (this.sprites.remove(sprite)) {
     				this.leave(sprite, sprite.getX() / TILE_WIDTH, sprite.getY() / TILE_HEIGHT);
@@ -157,6 +169,7 @@ public class YSPanel extends AbsolutePanel {
     				}
     			}
     		}
+    		this.toRemove.clear();
     	
     		for(Sprite sprite : this.sprites) {
     			if (sprite.isEnemy()) {
@@ -219,11 +232,7 @@ public class YSPanel extends AbsolutePanel {
     }
     
     public void addSprite(Sprite sprite) {
-        this.sprites.add(sprite);
-        if (sprite.isEnemy()) {
-        	Enemy enemy = (Enemy) sprite;
-        	this.enemies.add(enemy);
-        }
+        this.toAdd.add(sprite);
     }
     
     private void albertMessage() {

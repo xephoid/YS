@@ -5,8 +5,10 @@ import com.ionmarkgames.ys.client.objects.You;
 import com.ionmarkgames.ys.client.objects.enemies.Bug;
 import com.ionmarkgames.ys.client.objects.enemies.Clown;
 import com.ionmarkgames.ys.client.objects.enemies.Coin;
+import com.ionmarkgames.ys.client.objects.enemies.Failure;
 import com.ionmarkgames.ys.client.objects.enemies.Ghost;
 import com.ionmarkgames.ys.client.objects.enemies.Lips;
+import com.ionmarkgames.ys.client.objects.enemies.Mic;
 import com.ionmarkgames.ys.client.objects.enemies.Person;
 import com.ionmarkgames.ys.client.objects.enemies.Ring;
 import com.ionmarkgames.ys.client.objects.enemies.Snake;
@@ -46,7 +48,9 @@ public class EnemyFactory {
 			case 9: // commitment
 				return new Ring(panel, player);
 			case 10: // failure
+			    return new Failure(panel, player);
 			case 11: // glossophobia
+			    return new Mic(panel, player);
 			case 12: // thanathophobia
 		}
 		return null;
