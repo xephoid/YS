@@ -21,14 +21,16 @@ public class Lips extends Enemy {
     
     @Override
     public void act() throws RestartException {
+    	/*
         if (wander < 1 && !this.moveTowardsTarget(player.getX(), player.getY())) {
             wander = 8;
         } else {
             if (!this.move(direction) ) {
                 this.direction = this.getRandomDirection();
-            } else {
-                wander--;
             }
+            wander--;
         }
+        */
+    	this.moveTowardsTarget(player.getX(), player.getY());
     }
 }

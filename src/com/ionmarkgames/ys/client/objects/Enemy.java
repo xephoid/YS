@@ -14,11 +14,12 @@ public abstract class Enemy extends Sprite {
         this.player = player;
         int x = 0;
         int y = 0;
-        while(x < 5 || y < 5 || !this.panel.passable(x, y)) {
+        while(x < 5 || y < 5 || !this.panel.passable(x, y) || this.panel.hasEnemy(x, y)) {
             x = (int)(Math.random() * panel.getMapWidth());
             y = (int)(Math.random() * panel.getMapHeight());
         }
         this.setLocation(x * YSPanel.TILE_WIDTH, y * YSPanel.TILE_HEIGHT);
+        this.panel.visit(this, x, y);
     }
     
     @Override

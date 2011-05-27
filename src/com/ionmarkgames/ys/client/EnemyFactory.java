@@ -8,6 +8,7 @@ import com.ionmarkgames.ys.client.objects.enemies.Coin;
 import com.ionmarkgames.ys.client.objects.enemies.Ghost;
 import com.ionmarkgames.ys.client.objects.enemies.Lips;
 import com.ionmarkgames.ys.client.objects.enemies.Person;
+import com.ionmarkgames.ys.client.objects.enemies.Ring;
 import com.ionmarkgames.ys.client.objects.enemies.Snake;
 import com.ionmarkgames.ys.client.objects.enemies.Spider;
 import com.ionmarkgames.ys.client.objects.enemies.Tornado;
@@ -43,6 +44,7 @@ public class EnemyFactory {
 			case 8: // intimacy
 			    return new Lips(panel, player);
 			case 9: // commitment
+				return new Ring(panel, player);
 			case 10: // failure
 			case 11: // glossophobia
 			case 12: // thanathophobia

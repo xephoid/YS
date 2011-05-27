@@ -12,6 +12,11 @@ public class Wall extends Sprite {
     public void act() {
         // no-op
     }
+    
+    @Override
+    public void visit(Identifiable thing) {
+    	// no-op
+    }
 
     @Override
     public boolean passable() {

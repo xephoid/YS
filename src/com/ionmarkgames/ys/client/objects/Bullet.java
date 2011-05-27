@@ -7,11 +7,11 @@ public class Bullet extends Sprite {
     private int speed = 20;
     private You player;
     
-    public Bullet(YSPanel panel, int x, int y, GameDir direction) {
-        super(panel, "/images/bullet.gif");
+    public Bullet(YSPanel panel, You player, GameDir direction) {
+        super(panel, "/images/bullet_" + (player.getPower() > 8 ? 8 : player.getPower()) + ".gif");
         this.direction = direction;
-        this.setLocation(x, y);
-        this.player = panel.getPlayer();
+        this.setLocation(player.getX(), player.getY());
+        this.player = player;
     }
     
     @Override

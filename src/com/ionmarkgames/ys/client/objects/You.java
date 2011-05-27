@@ -98,7 +98,7 @@ public class You extends Sprite {
     }
     
     public void shoot(GameDir dir) {
-        this.panel.addSprite(new Bullet(this.panel, getX(), getY(), dir));
+        this.panel.addSprite(new Bullet(this.panel, this, dir));
     }
     
     public void damage(int amount, GameDir dir) {

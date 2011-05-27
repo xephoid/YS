@@ -5,22 +5,23 @@ import com.ionmarkgames.ys.client.YSPanel;
 import com.ionmarkgames.ys.client.objects.Enemy;
 import com.ionmarkgames.ys.client.objects.You;
 
-public class Clown extends Enemy {
+public class Ring extends Enemy {
 
-    private boolean freaking = false;
+	private boolean freaking = false;
     private int wait = 0;
     private int waitMax = (int) (Math.random() * 100);
-    
-    public Clown(YSPanel panel, You player) {
-        super(panel, player, "/images/clown.gif");
-        this.health = 5;
-        this.power = 1;
-        this.speed = 10;
-    }
-    
-    @Override
-    public void act() throws RestartException {
-        if (this.freaking) {
+	
+	public Ring(YSPanel panel, You player) {
+		super(panel, player, "/images/ring.gif");
+		
+		this.power = 5;
+		this.speed = 20;
+		this.health = 15;
+	}
+	
+	@Override
+	public void act() throws RestartException {
+		if (this.freaking) {
             if (this.gridX() * YSPanel.TILE_WIDTH == this.getX()
                     && this.gridY() * YSPanel.TILE_HEIGHT == this.getY()) {
                 this.direction = this.getRandomDirection();
@@ -41,5 +42,5 @@ public class Clown extends Enemy {
                 this.waitMax = 20;
             }
         }
-    }
+	}
 }
