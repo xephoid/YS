@@ -12,7 +12,7 @@ import com.ionmarkgames.ys.client.ui.UICallback;
 public class YS implements EntryPoint, UICallback<String> {
 
 	private RootPanel playArea = RootPanel.get("PlayArea");
-	private GameController controller = new GameController();
+	private GameController controller;
 	
     /**
      * This is the entry point method.
@@ -31,6 +31,7 @@ public class YS implements EntryPoint, UICallback<String> {
     }
 
 	public void done(String result) {
+	    controller = new GameController();
 		controller.setPlayerName(result);
 		playArea.clear();
 		

@@ -6,7 +6,9 @@ import com.ionmarkgames.ys.client.objects.You;
 
 public class GameController {
 
-	private int level = -1;
+    public static int START_LEVEL = -1;
+    
+	private int level;
 	private String playerName;
 	private boolean finished = false;
 	private RootPanel playArea = RootPanel.get("PlayArea");
@@ -162,7 +164,14 @@ public class GameController {
 	};
 	
 	public GameController() {
-		this.level = -1;
+		this.level = START_LEVEL;
+		
+		if (START_LEVEL > -1) {
+		    this.playerHealth = this.level;
+		    this.playerRange = 5;
+		    this.playerPower = this.level;
+		}
+		
 		this.enemyFactory = new EnemyFactory(this);
 	}
 	

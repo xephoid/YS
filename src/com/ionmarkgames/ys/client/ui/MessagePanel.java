@@ -10,7 +10,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MessagePanel extends VerticalPanel {
 
-	private static final int TEXT_SPEED = 50; // 50 is average
+	public static int TEXT_SPEED = 50; // 50 is average
 	
 	private Boolean tf = true;
 	private Button ok = new Button();

@@ -7,6 +7,7 @@
     position: absolute;
     left: 920px;
     top: 725px;
+    border: 0;
 }
 
 #PlayArea textarea {

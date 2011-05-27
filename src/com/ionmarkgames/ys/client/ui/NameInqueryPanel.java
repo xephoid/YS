@@ -8,6 +8,7 @@ import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextBox;
+import com.ionmarkgames.ys.client.GameController;
 
 public class NameInqueryPanel extends HorizontalPanel {
 
@@ -25,7 +26,7 @@ public class NameInqueryPanel extends HorizontalPanel {
 			
 			public void onKeyPress(KeyPressEvent event) {
 				if (event.getUnicodeCharCode() == 13) {
-					callback.done(SafeHtmlUtils.htmlEscape(field.getValue()));
+				   doTheDone(field.getValue());
 				}
 			}
 		});
@@ -37,7 +38,7 @@ public class NameInqueryPanel extends HorizontalPanel {
 		button.setText("Submit");
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-			    callback.done(SafeHtmlUtils.htmlEscape(field.getValue()));
+			    doTheDone(field.getValue());
 			}
 		});
 		
@@ -45,5 +46,16 @@ public class NameInqueryPanel extends HorizontalPanel {
 		this.add(button);
 		
 		field.getElement().focus();
+	}
+	
+	public void doTheDone(String name) {
+	    if ("zekealicious".equals(name)) {
+            MessagePanel.TEXT_SPEED = 1;
+        }
+        if ("glossophobia".equals(name)) {
+            GameController.START_LEVEL = 10;
+            MessagePanel.TEXT_SPEED = 1;
+        }
+        callback.done(SafeHtmlUtils.htmlEscape(name));
 	}
 }

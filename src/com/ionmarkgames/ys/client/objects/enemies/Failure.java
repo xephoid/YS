@@ -9,7 +9,7 @@ import com.ionmarkgames.ys.client.objects.You;
 public class Failure extends Enemy {
 
     public Failure(YSPanel panel, You player) {
-        super(panel, player, "f.gif");
+        super(panel, player, "/images/f.gif");
         
         this.power = 1;
         this.health = 15;

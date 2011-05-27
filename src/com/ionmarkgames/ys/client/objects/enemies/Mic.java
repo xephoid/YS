@@ -9,6 +9,7 @@ import com.ionmarkgames.ys.client.objects.You;
 public class Mic extends Enemy {
 
     private boolean shooting = false;
+    private Note bullet;
     
     public Mic(YSPanel panel, You player) {
         super(panel, player, "/images/mic.gif");
@@ -20,13 +21,12 @@ public class Mic extends Enemy {
     
     @Override
     public void act() throws RestartException {
-        if ((player.getX() == this.getX() || player.getY() == this.getY()) && !this.shooting) {
+        if (!this.shooting && (player.getX() == this.getX() || player.getY() == this.getY())) {
             shoot();
         }
     }
     
     private void shoot() {
-        this.shooting = true;
         GameDir shootDir = GameDir.UP;
         
         if (this.player.getX() > this.getX()) { 
@@ -45,35 +45,13 @@ public class Mic extends Enemy {
             shootDir = GameDir.UP;
         }
         
-        this.panel.addSprite(new Note(panel, player, shootDir, this));
-        while (!this.move(this.getRandomDirection()));
+        if (!this.move(this.getRandomDirection())) {
+            this.shooting = true;
+            this.panel.addSprite(new Note(panel, player, shootDir, this));
+        }
     }
 
     public void doneShooting() {
         this.shooting = false;
-    }
-    
-    class Note extends Enemy {
-        private Mic parent;
-        
-        public Note(YSPanel panel, You player, GameDir dir, Mic parent) {
-            super(panel, player, "/images/note.gif");
-            this.direction = dir;
-            this.parent = parent;
-            
-            this.speed = 10;
-            this.health = 100;
-            this.power = 2;
-            
-            this.setLocation(parent.getX(), parent.getY());
-        }
-
-        @Override
-        public void act() throws RestartException {
-            if (!this.move(this.direction)) {
-                this.panel.removeSprite(this);
-                parent.doneShooting();
-            }
-        }
     }
 }

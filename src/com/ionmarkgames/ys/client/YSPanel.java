@@ -24,9 +24,6 @@ import com.ionmarkgames.ys.client.ui.UICallback;
 
 public class YSPanel extends AbsolutePanel {
 	
-	//public static final int MAP_WIDTH = 51;
-	//public static final int MAP_HEIGHT = 36;
-	
     public static final int TILE_HEIGHT = 20;
     public static final int TILE_WIDTH = 20;
     private static final int TICKER_TIME = 50;
@@ -136,9 +133,7 @@ public class YSPanel extends AbsolutePanel {
     
     private void addEnemies() {
     	for (int i = 0; i < this.maxEnemies; i++) {
-        	Enemy poo = control.getLevelEnemy();
-        	this.visit(poo, poo.getX() / TILE_WIDTH, poo.getY() / TILE_WIDTH);
-        	this.addSprite(poo);
+        	this.addSprite(control.getLevelEnemy());
         }
     }
     
@@ -153,13 +148,14 @@ public class YSPanel extends AbsolutePanel {
                 if (sprite.isEnemy()) {
                     Enemy enemy = (Enemy) sprite;
                     this.enemies.add(enemy);
+                    this.visit(sprite, sprite.gridX(), sprite.gridY());
                 }
             }
             this.toAdd.clear();
     		
     		for (Sprite sprite : this.toRemove) {
     			if (this.sprites.remove(sprite)) {
-    				this.leave(sprite, sprite.getX() / TILE_WIDTH, sprite.getY() / TILE_HEIGHT);
+    				this.leave(sprite, sprite.gridX(), sprite.gridY());
     				sprite.remove();
     				if (sprite.isEnemy()) {
     					this.enemies.remove((Enemy) sprite);
@@ -172,6 +168,9 @@ public class YSPanel extends AbsolutePanel {
     		this.toRemove.clear();
     	
     		for(Sprite sprite : this.sprites) {
+    		    if (sprite.isWall()) {
+    		        continue;
+    		    }
     			if (sprite.isEnemy()) {
     				this.leave(sprite, sprite.gridX(), sprite.gridY());
     				sprite.act();
