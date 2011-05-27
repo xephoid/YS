@@ -28,7 +28,7 @@ public class GameController {
 		"...I am not sure there is a nice way to say this.  That was the poorest performance I have ever seen.  Let's try an easier one.",
 		"Maybe it is my fault your doing so badly.  Lets try one more.",
 		"At this point I would like to remind you that any psycological damage you may receive during these \"simulations\" is, although not required, expected.",
-		"Your lack of ability astounds me.  We can continue if you would like, but honestly I do not see much point.",
+		"Your lack of ability astounds me.",
 		"Are you still here?",
 		"Feel free to give up at any time as I am sure you will."
 	};
