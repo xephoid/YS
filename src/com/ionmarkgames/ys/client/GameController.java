@@ -19,15 +19,15 @@ public class GameController {
 	
 	private static final String[] intros = new String[] {
 		"You will need to press the <img src='/images/arrowkeys.gif'/> keys to navigate the area below.<br/>  We have also equipped you with a basic defense mechanism.  You can direct it using the <img src='/images/wasdkeys.gif' /> keys.  Please \"defend\" yourself from the <img src='images/bug.gif' />.",
-		"Well done.  You are catching on.  Lets practice some more \"self defense.\"",
+		"Well done.  You are catching on.  Let's practice some more \"self defense.\"",
 		"Good job, you may notice these are getting a bit trickier.  This is entirely intended.",
 		"Excellent.  You might have questions about what it is you are doing right now.  For legal reasons we have chosen not to tell you.",
 		"In this next area, keep in mind some obsticals in the \"simulation\" may take more time to overcome.",
 		"Please note: as a side effect of these \"simulations\" you may come under the suspicion that someone else is in here with you.  We assure you that nothing this individual may say is of any importance to you.",
-		"You got through that last one in less than optimal time.  We sugguest you try harder.",
+		"You got through that last one in less than optimal time.  We suggest you try harder.",
 		"...I am not sure there is a nice way to say this.  That was the poorest performance I have ever seen.  Let's try an easier one.",
 		"Maybe it is my fault your doing so badly.  Lets try one more.",
-		"At this point I would like to remind you that any psycological damage you may receive during these \"simulations\" is, although not required, expected.",
+		"At this point I would like to remind you that any psychological damage you may receive during these \"simulations\" is, although not required, expected.",
 		"Your lack of ability astounds me.",
 		"Are you still here?",
 		"Feel free to give up at any time as I am sure you will."
