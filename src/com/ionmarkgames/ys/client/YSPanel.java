@@ -134,7 +134,7 @@ public class YSPanel extends AbsolutePanel {
     }
     
     private void addEnemies() {
-    	for (int i = 0; i < 10; i++) {
+    	for (int i = 0; i < this.maxEnemies; i++) {
         	Enemy poo = control.getLevelEnemy();
         	this.visit(poo, poo.getX() / TILE_WIDTH, poo.getY() / TILE_WIDTH);
         	this.addSprite(poo);
