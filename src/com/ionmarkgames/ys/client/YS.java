@@ -19,7 +19,6 @@ public class YS implements EntryPoint, UICallback<String> {
      */
     public void onModuleLoad() {
     	RootPanel.get("Loading").setVisible(false);
-    	RootPanel.get("StatsArea").setVisible(false);
         playArea.setPixelSize(1020, 720); // 51 x 38
         NameInqueryPanel getName = new NameInqueryPanel(this);
         playArea.add(getName);

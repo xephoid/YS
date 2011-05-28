@@ -42,7 +42,7 @@ public class You extends Sprite {
     		if (this.health < 1) {
     			throw new RestartException();
     		}
-    		
+    		panel.updateLifePanel(this.health);
     		this.damage = 0;
     	}
     }

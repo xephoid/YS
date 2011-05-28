@@ -19,6 +19,7 @@ import com.ionmarkgames.ys.client.objects.Sprite;
 import com.ionmarkgames.ys.client.objects.Wall;
 import com.ionmarkgames.ys.client.objects.You;
 import com.ionmarkgames.ys.client.ui.IncreaseStatInquery;
+import com.ionmarkgames.ys.client.ui.LifePanel;
 import com.ionmarkgames.ys.client.ui.MessagePanel;
 import com.ionmarkgames.ys.client.ui.UICallback;
 
@@ -41,6 +42,8 @@ public class YSPanel extends AbsolutePanel {
     private String albertText;
     private String wallImageUrl;
     private int maxEnemies = 10;
+    
+    private LifePanel lifePanel = new LifePanel();
     
     private int mapHeight; // Max = 51 
     private int mapWidth; // Max = 36
@@ -96,6 +99,9 @@ public class YSPanel extends AbsolutePanel {
                 }
             }
         });
+        RootPanel.get("StatsArea").clear();
+        RootPanel.get("StatsArea").add(this.lifePanel);
+        RootPanel.get("StatsArea").setVisible(true);
     }
     
     public void start() {
@@ -108,6 +114,7 @@ public class YSPanel extends AbsolutePanel {
         this.player = new You(this);
         this.visit(player, player.getX() / TILE_WIDTH, player.getY() / TILE_WIDTH);
         control.updatePlayer(player);
+        this.updateLifePanel(player.getHealth());
         
         this.addEnemies();
         
@@ -288,10 +295,15 @@ public class YSPanel extends AbsolutePanel {
 		// Rebuild
 		player = new You(this);
 		control.updatePlayer(player);
+		this.updateLifePanel(player.getHealth());
 		
 		this.addEnemies();
 		
 		this.showIntro();
+    }
+    
+    public void updateLifePanel(int life) {
+    	this.lifePanel.update(life);
     }
 
 	public You getPlayer() {
