@@ -9,6 +9,8 @@ public abstract class Enemy extends Sprite {
     protected int power = 0;
     protected int speed = 0;
     
+    protected boolean dead = false;
+    
     public Enemy(YSPanel panel, You player, String imgUrl) {
         super(panel, imgUrl);
         this.player = player;
@@ -19,7 +21,6 @@ public abstract class Enemy extends Sprite {
             y = (int)(Math.random() * panel.getMapHeight());
         }
         this.setLocation(x * YSPanel.TILE_WIDTH, y * YSPanel.TILE_HEIGHT);
-        this.panel.visit(this, x, y);
     }
     
     @Override
@@ -32,6 +33,7 @@ public abstract class Enemy extends Sprite {
         if (thing.isBullet()) {
         	this.health -= player.getPower();
         	if (health < 1) {
+        		this.dead = true;
         		this.panel.removeSprite(this);
         	}
         } else if(thing.isPlayer()) {
@@ -205,5 +207,9 @@ public abstract class Enemy extends Sprite {
     
     public int getPower() {
     	return this.power;
+    }
+    
+    public boolean isDead() {
+    	return this.dead;
     }
 }

@@ -8,22 +8,51 @@ import com.ionmarkgames.ys.client.objects.You;
 
 public class Mic extends Enemy {
 
-    private boolean shooting = false;
-    private Note bullet;
+    enum Mode {
+    	WAITING,
+    	RUNNING,
+    	SHOOTING
+    }
+    
+    private Mode mode;
+    
+    private boolean shot = false;
     
     public Mic(YSPanel panel, You player) {
         super(panel, player, "/images/mic.gif");
         
-        this.speed = 20;
+        this.speed = 5;
         this.health = 15;
         this.power = 2;
+        
+        this.mode = Mode.WAITING;
     }
     
     @Override
     public void act() throws RestartException {
-        if (!this.shooting && (player.getX() == this.getX() || player.getY() == this.getY())) {
-            shoot();
-        }
+    	switch (mode) {
+    		case WAITING :
+    			if ((player.getX() == this.getX() || player.getY() == this.getY())) {
+    				this.direction = this.getRandomDirection();
+    				this.mode = Mode.RUNNING;
+    	        }
+    			break;
+    		case RUNNING :
+    			if (this.move(direction)) {
+    				if (this.getX() == this.gridX() * YSPanel.TILE_WIDTH 
+    						&& this.getY() == this.gridY() * YSPanel.TILE_HEIGHT) {
+    					this.mode = Mode.WAITING;
+    				}
+    			} else {
+    				this.mode = Mode.SHOOTING;
+    			}
+    			break;
+    		case SHOOTING :
+    			if (!shot) {
+    				shoot();
+    			}
+    			break;
+    	}
     }
     
     private void shoot() {
@@ -45,13 +74,12 @@ public class Mic extends Enemy {
             shootDir = GameDir.UP;
         }
         
-        if (!this.move(this.getRandomDirection())) {
-            this.shooting = true;
-            this.panel.addSprite(new Note(panel, player, shootDir, this));
-        }
+        this.panel.addSprite(new Note(panel, player, shootDir, this));
+        shot = true;
     }
 
     public void doneShooting() {
-        this.shooting = false;
+    	this.mode = Mode.WAITING;
+    	this.shot = false;
     }
 }

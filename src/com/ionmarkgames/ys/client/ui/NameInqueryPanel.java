@@ -56,6 +56,14 @@ public class NameInqueryPanel extends HorizontalPanel {
             GameController.START_LEVEL = 10;
             MessagePanel.TEXT_SPEED = 1;
         }
+        if ("thanathophobia".equals(name)) {
+            GameController.START_LEVEL = 11;
+            MessagePanel.TEXT_SPEED = 1;
+        }
+        if ("commitment".equals(name)) {
+            GameController.START_LEVEL = 8;
+            MessagePanel.TEXT_SPEED = 1;
+        }
         callback.done(SafeHtmlUtils.htmlEscape(name));
 	}
 }

@@ -11,6 +11,7 @@ import com.ionmarkgames.ys.client.objects.enemies.Lips;
 import com.ionmarkgames.ys.client.objects.enemies.Mic;
 import com.ionmarkgames.ys.client.objects.enemies.Person;
 import com.ionmarkgames.ys.client.objects.enemies.Ring;
+import com.ionmarkgames.ys.client.objects.enemies.Skull;
 import com.ionmarkgames.ys.client.objects.enemies.Snake;
 import com.ionmarkgames.ys.client.objects.enemies.Spider;
 import com.ionmarkgames.ys.client.objects.enemies.Tornado;
@@ -52,6 +53,7 @@ public class EnemyFactory {
 			case 11: // glossophobia
 			    return new Mic(panel, player);
 			case 12: // thanathophobia
+				return new Skull(panel, player);
 		}
 		return null;
 	}

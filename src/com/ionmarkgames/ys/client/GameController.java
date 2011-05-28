@@ -1,8 +1,11 @@
 package com.ionmarkgames.ys.client;
 
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.ionmarkgames.ys.client.objects.Enemy;
 import com.ionmarkgames.ys.client.objects.You;
+import com.ionmarkgames.ys.client.ui.MessagePanel;
+import com.ionmarkgames.ys.client.ui.UICallback;
 
 public class GameController {
 
@@ -73,7 +76,7 @@ public class GameController {
 	        51, 30, 15
 	    },
 	    new int[] { // Level 13
-	        51, 30, 5
+	        51, 30, 10
 	    }
 	};
 	
@@ -89,7 +92,8 @@ public class GameController {
 		"/images/heart.gif",
 		"/images/diamond.gif",
 		"/images/a.gif",
-		"/images/ear.gif"
+		"/images/ear.gif",
+		"/images/skull.gif"
 	};
 	
 	private static final String[][] albert = new String[][] {
@@ -185,6 +189,11 @@ public class GameController {
 	
 	public void nextLevel() {
 		level++;
+		
+		if (level == 13) {
+			this.gameEnd();
+			return;
+		}
 		YSPanel result = new YSPanel(this);
 		result.setPixelSize(mapDimensions[this.level][0] * YSPanel.TILE_WIDTH, mapDimensions[this.level][1] * YSPanel.TILE_HEIGHT);
 		result.setMapWidth(mapDimensions[this.level][0]);
@@ -202,6 +211,47 @@ public class GameController {
 		
 		this.currentPanel = result;
 		result.start();
+	}
+	
+	private void gameEnd() {
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("Good job! You are finished.  I apologize for my rudeness earlier.  Past studies have shown that negative reinforcement helped people complete the final tasks with more urgency.");
+		builder.append("<br/><br/>");
+		builder.append("Your assistance in these \"simulations\" is instrumental to the work here at PelCo.  At this point you may be wondering what exactly it is you just did.  Due to certain legal implications it is in your best interest that you do not know.  However, you can rest assured you've helped tremendously in the advancement of mind-computer interfaces and simulated realities.  You have just been involved in the ground floor of the birth of some very exciting new technology.  Kudos!");
+		builder.append("<br/><br/>");
+		builder.append("Here is some more information now that you have finished the \"simulations.\"");
+		builder.append("<br/><br/>");
+		builder.append("As a precautionary measure PelCo does not recommend operating heavy machinery within 4 hours of participating in \"simulations.\"");
+		builder.append("<br/><br/>");
+		builder.append("In the unlikely event of psychological damage you may experience some of the following symptoms:<br/>");
+		builder.append("- Nausea<br/>");
+		builder.append("- Dementia<br/>");
+		builder.append("- Paranoia<br/>");
+		builder.append("- Episodes of increased heart rate<br/>");
+		builder.append("- Hallucinations<br/>");
+		builder.append("- Night terrors<br/>");
+		builder.append("- Psychotic Episodes<br/>");
+		builder.append("<br/>");
+		builder.append("If you experience any of the above we encourage you to stay calm.  It would also be ill advised to participate with any more \"simulations\" as this may cause further damage.");
+		builder.append("<br/><br/>");
+		builder.append("If you have not experienced any of these side effects we encourage you to participate in the \"simulations\" as frequently as possible.  Also feel free to invite others participate as well.");
+		builder.append("<br/><br/>");
+		builder.append("Have a lovely day!");
+		MessagePanel fin = new MessagePanel(builder.toString(), new UICallback<Boolean>() {
+			
+			@Override
+			public void failed() {
+			}
+			
+			@Override
+			public void done(Boolean obj) {
+				playArea.clear();
+				HTML tifa = new HTML("<div style='text-align: center; width: 100%;'><div><img src='http://modiopera.com/tifa/2010-02-01%2002.19.42.jpg' /></div><div>For Tifa (2008 - 2011)</div><div><br/><br/>by Christopher \"Zeke\" Swepson</div></div>");
+				playArea.add(tifa);
+			}
+		});
+		fin.animate();
 	}
 	
 	public void persistPlayer(You player) {

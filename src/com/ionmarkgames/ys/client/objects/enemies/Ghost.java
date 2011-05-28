@@ -18,4 +18,7 @@ public class Ghost extends Enemy {
 		this.moveTowardsTarget(player.getX(), player.getY());
 	}
 
+	public void teleport(int x, int y) {
+		this.setLocation(x, y);
+	}
 }
