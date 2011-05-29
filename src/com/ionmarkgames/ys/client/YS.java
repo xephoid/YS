@@ -1,6 +1,7 @@
 package com.ionmarkgames.ys.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.ionmarkgames.ys.client.ui.MessagePanel;
 import com.ionmarkgames.ys.client.ui.NameInqueryPanel;
@@ -21,6 +22,10 @@ public class YS implements EntryPoint, UICallback<String> {
     	RootPanel.get("Loading").setVisible(false);
         playArea.setPixelSize(1020, 720); // 51 x 38
         NameInqueryPanel getName = new NameInqueryPanel(this);
+        
+        HTML pelcoLogo = new HTML("<div class='pelco_logo'>Pel Company ltd</div><div class='pelco_quote'><i>\"There's work to be done.\" - John Pel</i></div><br/><br/>");
+        
+        playArea.add(pelcoLogo);
         playArea.add(getName);
     }
     

@@ -140,7 +140,9 @@ public class YSPanel extends AbsolutePanel {
     
     private void addEnemies() {
     	for (int i = 0; i < this.maxEnemies; i++) {
-        	this.addSprite(control.getLevelEnemy());
+    		Enemy enemy = control.getLevelEnemy();
+    		this.visit(enemy, enemy.gridX(), enemy.gridY());
+        	this.addSprite(enemy);
         }
     }
     

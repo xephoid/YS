@@ -1,5 +1,7 @@
 #PlayArea {
     z-index: 10;
+    margin-left: auto;
+    margin-top: 10px;
 }
 
 #PlayArea .logo_img {
@@ -94,11 +96,22 @@
 
 #StatsArea {
 	position: absolute;
-	top: 0;
-	left: 0;
+	top: 10px;
+	left: 400px;
 	font-size: 20px;
 	z-index: 200;
 	font-weight: 700;
 	background-color: #fff;
 	text-align: center;
+	margin: auto;
+}
+
+.pelco_logo {
+	font-size: 50px;
+	font-weight: 700;
+	margin-top: 100px;
+}
+
+.pelco_quote {
+	font-size: 10px;
 }
