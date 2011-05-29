@@ -51,7 +51,7 @@ public class Skull extends Enemy {
 				panel.addSprite(newChild);
 				newChild.teleport(spawnX * YSPanel.TILE_WIDTH, spawnY * YSPanel.TILE_HEIGHT);
 				children.add(newChild);
-				recoil = 11;
+				recoil = 26;
 			}
 		} else {
 			for (Ghost child : this.children) {

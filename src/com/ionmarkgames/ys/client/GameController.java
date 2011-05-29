@@ -171,8 +171,8 @@ public class GameController {
 		this.level = START_LEVEL;
 		
 		if (START_LEVEL > -1) {
-		    this.playerHealth = this.level;
-		    this.playerRange = 5;
+		    this.playerHealth = 4;
+		    this.playerRange = 4;
 		    this.playerPower = this.level;
 		}
 		
@@ -214,6 +214,7 @@ public class GameController {
 	}
 	
 	private void gameEnd() {
+		playArea.clear();
 		StringBuilder builder = new StringBuilder();
 		
 		builder.append("Good job! You are finished.  I apologize for my rudeness earlier.  Past studies have shown that negative reinforcement helped people complete the final tasks with more urgency.");
@@ -247,7 +248,7 @@ public class GameController {
 			@Override
 			public void done(Boolean obj) {
 				playArea.clear();
-				HTML tifa = new HTML("<div style='text-align: center; width: 100%;'><div><img src='http://modiopera.com/tifa/2010-02-01%2002.19.42.jpg' /></div><div>For Tifa (2008 - 2011)</div><div><br/><br/>by Christopher \"Zeke\" Swepson</div></div>");
+				HTML tifa = new HTML("<div style='text-align: center; width: 100%;'><div><img src='http://modiopera.com/tifa/2010-02-01%2002.19.42.jpg' /></div><div>For Tifa (2008 - 2011)</div><div><br/><br/>by Christopher \"Zeke\" Swepson<br/>Special thanks to Victoria for being very patient :)</div></div>");
 				playArea.add(tifa);
 			}
 		});
