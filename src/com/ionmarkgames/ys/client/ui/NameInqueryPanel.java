@@ -52,14 +52,37 @@ public class NameInqueryPanel extends HorizontalPanel {
 	    if ("zekealicious".equals(name)) {
             MessagePanel.TEXT_SPEED = 1;
         }
+	    
+	    if ("coulrophobia".equals(name)) {
+            GameController.START_LEVEL = 3;
+            MessagePanel.TEXT_SPEED = 1;
+        }
+	    
+	    if ("acrophobia".equals(name)) {
+            GameController.START_LEVEL = 5;
+            MessagePanel.TEXT_SPEED = 1;
+        }
+	    
+	    if ("chrometophobia".equals(name)) {
+            GameController.START_LEVEL = 6;
+            MessagePanel.TEXT_SPEED = 1;
+        }
+	    
+	    if ("intimacy".equals(name)) {
+            GameController.START_LEVEL = 7;
+            MessagePanel.TEXT_SPEED = 1;
+        }
+	    
         if ("glossophobia".equals(name)) {
             GameController.START_LEVEL = 10;
             MessagePanel.TEXT_SPEED = 1;
         }
+        
         if ("thanathophobia".equals(name)) {
             GameController.START_LEVEL = 11;
             MessagePanel.TEXT_SPEED = 1;
         }
+        
         if ("commitment".equals(name)) {
             GameController.START_LEVEL = 8;
             MessagePanel.TEXT_SPEED = 1;

@@ -32,10 +32,10 @@ public class EnemyFactory {
 				return new Bug(panel, player);
 			case 1: // ophidiophobia
 				return new Snake(panel, player);
-			case 2: // arachnophobia
-				return new Spider(panel, player);
-			case 3: // phasmophobia
+			case 2: // phasmophobia
 				return new Ghost(panel, player);
+			case 3: // arachnophobia
+				return new Spider(panel, player);
 			case 4: // coulrophobia
 			    return new Clown(panel, player);
 			case 5: // sociaphobia

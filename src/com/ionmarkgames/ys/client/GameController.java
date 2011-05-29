@@ -83,8 +83,8 @@ public class GameController {
 	private static final String[] walls = new String[] {
 		"/images/wall.gif",
 		"/images/bush.gif",
-		"/images/web.gif",
 		"/images/grave1.gif",
+		"/images/web.gif",
 		"/images/circus.gif",
 		"/images/eye.gif",
 		"/images/house.gif",

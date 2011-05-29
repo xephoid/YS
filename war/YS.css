@@ -26,11 +26,11 @@
 }
 
 #PlayArea .level_2 {
-	background-color: #808080;
+	background-color: #000;
 }
 
 #PlayArea .level_3 {
-	background-color: #000;
+	background-color: #808080;
 }
 
 #PlayArea .level_4 {
