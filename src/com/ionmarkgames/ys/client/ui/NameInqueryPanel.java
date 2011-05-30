@@ -58,6 +58,11 @@ public class NameInqueryPanel extends HorizontalPanel {
             MessagePanel.TEXT_SPEED = 1;
         }
 	    
+	    if ("sociaphobia".equals(name)) {
+            GameController.START_LEVEL = 4;
+            MessagePanel.TEXT_SPEED = 1;
+        }
+	    
 	    if ("acrophobia".equals(name)) {
             GameController.START_LEVEL = 5;
             MessagePanel.TEXT_SPEED = 1;

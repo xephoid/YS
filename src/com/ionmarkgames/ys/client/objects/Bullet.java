@@ -28,16 +28,13 @@ public class Bullet extends Sprite {
         int futureGridX = gridX();
 		int futureGridY = gridY();
 		
-        int increment = YSPanel.TILE_WIDTH;
         switch(this.direction) {
             case DOWN:
                 deltaY = speed;
-                increment = YSPanel.TILE_HEIGHT;
                 futureGridY = gridY() + 1;
                 break;
             case UP:
                 deltaY = -speed;
-                increment = YSPanel.TILE_HEIGHT;
                 futureGridY = gridY() - 1;
                 break;
             case RIGHT:
@@ -50,13 +47,13 @@ public class Bullet extends Sprite {
                 break;
         }
         
-        double part1 = Math.pow(( this.player.getCenterX() - this.getCenterX() ), 2);
-		double part2 = Math.pow(( this.player.getCenterY() - this.getCenterY() ), 2);
+        double part1 = Math.pow(( this.player.gridX() - this.gridX() ), 2);
+		double part2 = Math.pow(( this.player.gridY() - this.gridY() ), 2);
 		double underRadical = part1 + part2;
 		
         if (!this.panel.passable(futureGridX, futureGridY)) {
             this.panel.removeSprite(this);
-        } else if ((int)Math.sqrt(underRadical) / increment > player.getRange() - 1) {
+        } else if ((int)Math.sqrt(underRadical) > player.getRange() - 1) {
 			this.panel.removeSprite(this);
 		} else {
 			this.setLocation(getX() + deltaX, getY() + deltaY);
