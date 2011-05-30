@@ -34,7 +34,7 @@ public class Person extends Enemy {
 	
 	public void doge() {
 		if (player.getX() == this.getX()) {
-			if (!this.move(GameDir.LEFT) || !this.move(GameDir.RIGHT)) { 
+			if (!this.move(GameDir.LEFT) && !this.move(GameDir.RIGHT)) { 
 				if (player.getY() > this.getY()) {
 					this.move(GameDir.UP);
 				} else {
@@ -42,7 +42,7 @@ public class Person extends Enemy {
 				}
 			}
 		} else if (player.getY() == this.getY()) {
-			if (!this.move(GameDir.UP) || !this.move(GameDir.DOWN)) {
+			if (!this.move(GameDir.UP) && !this.move(GameDir.DOWN)) {
 				if (player.getX() > this.getX()) {
 					this.move(GameDir.LEFT);
 				} else {
