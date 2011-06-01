@@ -1,5 +1,11 @@
 package com.ionmarkgames.ys.client;
 
+import com.google.gwt.http.client.Request;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestCallback;
+import com.google.gwt.http.client.RequestException;
+import com.google.gwt.http.client.Response;
+import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.ionmarkgames.ys.client.objects.Enemy;
@@ -211,6 +217,34 @@ public class GameController {
 		
 		this.currentPanel = result;
 		result.start();
+		this.postLevelComplete();
+	}
+	
+	private void postLevelComplete() {
+		RequestBuilder rb = new RequestBuilder(RequestBuilder.POST, "http://modiopera.com/highscore/delete.php");
+        rb.setHeader("Content-type", "application/x-www-form-urlencoded");
+		
+		StringBuilder params = new StringBuilder();
+        params.append(URL.encode("score")).append("=").append(URL.encode("" + this.level));
+        params.append("&");
+        params.append(URL.encode("name")).append("=").append(URL.encode(playerName));
+        params.append("&");
+        params.append(URL.encode("act")).append("=").append(URL.encode("f195802c72f2aeb6ecd6b96a9bff00f4"));
+        
+        try {
+            rb.sendRequest(params.toString(), new RequestCallback() {
+                
+                public void onResponseReceived(Request request, Response response) {
+                    // no-op
+                }
+                
+                public void onError(Request request, Throwable exception) {
+                    // no-op
+                }
+            });
+        } catch(RequestException e) {
+            // no-op
+        }
 	}
 	
 	private void gameEnd() {
@@ -250,9 +284,13 @@ public class GameController {
 				playArea.clear();
 				HTML tifa = new HTML("<div style='text-align: center; width: 100%;'><div><img src='http://modiopera.com/tifa/2010-02-01%2002.19.42.jpg' /></div><div>For Tifa (2008 - 2011)</div><div><br/><br/>by Christopher \"Zeke\" Swepson<br/>Special thanks to Victoria for being very patient :)</div></div>");
 				playArea.add(tifa);
+				
+				level++;
+				postLevelComplete();
 			}
 		});
 		fin.animate();
+		this.postLevelComplete();
 	}
 	
 	public void persistPlayer(You player) {

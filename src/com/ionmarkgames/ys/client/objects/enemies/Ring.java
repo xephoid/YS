@@ -3,6 +3,7 @@ package com.ionmarkgames.ys.client.objects.enemies;
 import com.ionmarkgames.ys.client.RestartException;
 import com.ionmarkgames.ys.client.YSPanel;
 import com.ionmarkgames.ys.client.objects.Enemy;
+import com.ionmarkgames.ys.client.objects.Identifiable;
 import com.ionmarkgames.ys.client.objects.You;
 
 public class Ring extends Enemy {
@@ -42,5 +43,15 @@ public class Ring extends Enemy {
                 this.waitMax = 20;
             }
         }
+	}
+	
+	@Override
+	public void visit(Identifiable thing) {
+		super.visit(thing);
+		if (this.health > 0 && thing.isBullet()) {
+			this.freaking = false;
+			this.wait = 0;
+			this.waitMax = 5;
+		}
 	}
 }
