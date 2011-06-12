@@ -10,7 +10,7 @@ public class Tornado extends Enemy {
 	public Tornado(YSPanel panel, You player) {
 		super(panel, player, "/images/tornado.gif");
 		this.power = 2;
-		this.health = 3;
+		this.health = 2;
 		this.speed = 10;
 		
 		this.direction = this.getRandomDirection();
