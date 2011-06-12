@@ -44,6 +44,24 @@ public class You extends Sprite {
     		}
     		panel.updateLifePanel(this.health);
     		this.damage = 0;
+    	} else {
+    		switch(this.direction) {
+    			case UP:
+    				this.moveUp();
+    				break;
+    			case DOWN:
+    				this.moveDown();
+    				break;
+    			case LEFT:
+    				this.moveLeft();
+    				break;
+    			case RIGHT:
+    				this.moveRight();
+    				break;
+    			case NONE:
+    			default:
+    				// no-op
+    		}
     	}
     }
     
@@ -156,5 +174,9 @@ public class You extends Sprite {
 	
 	public void resetHealth() {
 		this.health = this.maxHealth;
+	}
+	
+	public void setDirection(GameDir dir) {
+		this.direction = dir;
 	}
 }

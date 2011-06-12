@@ -8,6 +8,8 @@ import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -63,20 +65,47 @@ public class YSPanel extends AbsolutePanel {
             public void onKeyDown(KeyDownEvent event) {
                 switch (event.getNativeKeyCode()) {
                     case KeyCodes.KEY_UP:
-                        player.moveUp();
+                        player.setDirection(GameDir.UP);
                         break;
                     case KeyCodes.KEY_DOWN:
-                        player.moveDown();
+                        player.setDirection(GameDir.DOWN);
                         break;
                     case KeyCodes.KEY_RIGHT:
-                        player.moveRight();
+                        player.setDirection(GameDir.RIGHT);
                         break;
                     case KeyCodes.KEY_LEFT:
-                        player.moveLeft();
+                        player.setDirection(GameDir.LEFT);
                         break;
                 }
             }
         });
+        keyHandler.addKeyUpHandler(new KeyUpHandler() {
+			
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				switch (event.getNativeKeyCode()) {
+                case KeyCodes.KEY_UP:
+                	if (player.getDirection() == GameDir.UP) {
+                		player.setDirection(GameDir.NONE);
+                	}
+                case KeyCodes.KEY_DOWN:
+                	if (player.getDirection() == GameDir.DOWN) {
+                		player.setDirection(GameDir.NONE);
+                	}
+                    break;
+                case KeyCodes.KEY_RIGHT:
+                	if (player.getDirection() == GameDir.RIGHT) {
+                		player.setDirection(GameDir.NONE);
+                	}
+                    break;
+                case KeyCodes.KEY_LEFT:
+                	if (player.getDirection() == GameDir.LEFT) {
+                		player.setDirection(GameDir.NONE);
+                	}
+                    break;
+				}
+			}
+		});
         keyHandler.addKeyPressHandler(new KeyPressHandler() {
             public void onKeyPress(KeyPressEvent event) {
                 switch(event.getCharCode()) {

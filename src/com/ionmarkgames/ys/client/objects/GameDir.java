@@ -4,5 +4,6 @@ public enum GameDir {
     UP,
     DOWN,
     LEFT,
-    RIGHT
+    RIGHT,
+    NONE
 }
