@@ -12,7 +12,7 @@ public class Spider extends Enemy {
 		RETURN
 	}
 	
-	private static final int MAX_THRESHOLD = 100;
+	private static final int MAX_THRESHOLD = 25;
 	
 	private Mode mode = Mode.WAIT;
 	
@@ -29,7 +29,7 @@ public class Spider extends Enemy {
 		this.homeX = this.getX();
 		this.homeY = this.getY();
 		this.health = 1;
-		this.speed = 2;
+		this.speed = 5;
 		this.power = 1;
 	}
 	
