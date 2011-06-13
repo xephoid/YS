@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
+import com.ionmarkgames.ys.client.objects.Bullet;
 import com.ionmarkgames.ys.client.objects.Enemy;
 import com.ionmarkgames.ys.client.objects.GameDir;
 import com.ionmarkgames.ys.client.objects.Sprite;
@@ -34,6 +35,7 @@ public class YSPanel extends AbsolutePanel {
     private List<Sprite> sprites = new ArrayList<Sprite>();
     private List<Sprite> toAdd = new ArrayList<Sprite>();
     private List<Sprite> toRemove = new ArrayList<Sprite>();
+    private List<Bullet> bulletAdd = new ArrayList<Bullet>();
     private List<Enemy> enemies = new ArrayList<Enemy>();
     private Sprite[][] grid;
     private TextArea keyHandler;
@@ -181,6 +183,11 @@ public class YSPanel extends AbsolutePanel {
     		
     		player.act();
     		
+    		for (Bullet b : bulletAdd) {
+    			this.sprites.add(0, b);
+    		}
+    		bulletAdd.clear();
+    		
     		for (Sprite sprite : toAdd) {
                 this.sprites.add(sprite);
                 if (sprite.isEnemy()) {
@@ -269,7 +276,12 @@ public class YSPanel extends AbsolutePanel {
     }
     
     public void addSprite(Sprite sprite) {
-        this.toAdd.add(sprite);
+    	if (sprite.isBullet()) {
+    		Bullet bullet = (Bullet) sprite;
+    		bulletAdd.add(bullet);
+    	} else {
+    		this.toAdd.add(sprite);
+    	}
     }
     
     private void albertMessage() {

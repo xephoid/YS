@@ -16,7 +16,7 @@ public class Coin extends Enemy {
 		
 		this.power = 2;
 		this.health = 10;
-		this.speed = 10;
+		this.speed = 5;
 		
 		this.targetX = this.getX();
 		this.targetY = this.getY();
