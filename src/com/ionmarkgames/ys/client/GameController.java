@@ -251,7 +251,7 @@ public class GameController {
 		playArea.clear();
 		StringBuilder builder = new StringBuilder();
 		
-		builder.append("Good job! You are finished.  I apologize for my rudeness earlier.  Past studies have shown that negative reinforcement helped people complete the final tasks with more urgency.");
+		builder.append("Good job " +playerName+ "! You are finished.  I apologize for my rudeness earlier.  Past studies have shown that negative reinforcement helped people complete the final tasks with more urgency.");
 		builder.append("<br/><br/>");
 		builder.append("Your assistance in these \"simulations\" is instrumental to the work here at PelCo.  At this point you may be wondering what exactly it is you just did.  Due to certain legal implications it is in your best interest that you do not know.  However, you can rest assured you've helped tremendously in the advancement of mind-computer interfaces and simulated realities.  You have just been involved in the ground floor of the birth of some very exciting new technology.  Kudos!");
 		builder.append("<br/><br/>");
