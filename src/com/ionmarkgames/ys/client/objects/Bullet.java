@@ -19,6 +19,7 @@ public class Bullet extends Sprite {
     	if (this.panel.hasEnemy(gridX(), gridY())) {
         	this.panel.visit(this, gridX(), gridY());
         	this.panel.removeSprite(this);
+        	// TODO: check surounding tiles and calculate distance...
         	return;
         }
     	

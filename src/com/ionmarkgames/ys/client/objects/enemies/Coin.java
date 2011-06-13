@@ -1,41 +1,66 @@
 package com.ionmarkgames.ys.client.objects.enemies;
 
-import com.ionmarkgames.ys.client.RestartException;
 import com.ionmarkgames.ys.client.YSPanel;
 import com.ionmarkgames.ys.client.objects.Enemy;
-import com.ionmarkgames.ys.client.objects.Identifiable;
 import com.ionmarkgames.ys.client.objects.You;
 
 public class Coin extends Enemy {
-	
-	private int targetX;
-	private int targetY;
 
+	private enum Mode {
+		WAIT,
+		ATTACK,
+		RETURN
+	}
+	
+	private static final int MAX_THRESHOLD = 25;
+	
+	private Mode mode = Mode.WAIT;
+	
+	private int threshold = 0;
+	private int targetX = 0;
+	private int targetY = 0;
+	
+	private int homeX;
+	private int homeY;
+	
 	public Coin(YSPanel panel, You player) {
 		super(panel, player, "/images/coin.gif");
 		
-		this.power = 2;
+		this.homeX = this.getX();
+		this.homeY = this.getY();
 		this.health = 10;
 		this.speed = 5;
-		
-		this.targetX = this.getX();
-		this.targetY = this.getY();
+		this.power = 2;
 	}
 	
 	@Override
-	public void act() throws RestartException {
-		if (this.targetX != this.getX() || this.targetY != this.getY()) {
-			this.moveTowardsTarget(targetX, targetY);
+	public void act() {
+		this.threshold++;
+		switch(this.mode) {
+			case WAIT:
+				double part1 = Math.pow(( this.player.getCenterX() - this.getCenterX() ), 2);
+				double part2 = Math.pow(( this.player.getCenterY() - this.getCenterY() ), 2);
+				double underRadical = part1 + part2;
+				
+				if ((int)Math.sqrt(underRadical) / YSPanel.TILE_WIDTH < 4) {
+					this.targetX = player.getX();
+					this.targetY = player.getY();
+					this.threshold = 0;
+					this.mode = Mode.ATTACK;
+				}
+				break;
+			case ATTACK:
+				if (threshold > MAX_THRESHOLD || this.moveTowardsTarget(this.targetX, this.targetY)) {
+					this.mode = Mode.RETURN;
+					threshold = 0;
+				}
+				break;
+			case RETURN:
+				if (threshold > MAX_THRESHOLD || this.moveTowardsTarget(homeX, homeY)) {
+					this.mode = Mode.WAIT;
+					threshold = 0;
+				}
+				break;
 		}
 	}
-	
-	@Override
-	public void visit(Identifiable thing) {
-		super.visit(thing);
-		if (this.health > 0 && thing.isBullet()) {
-			this.targetX = player.getX();
-			this.targetY = player.getY();
-		}
-	}
-
 }
