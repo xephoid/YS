@@ -30,7 +30,7 @@ public class YSPanel extends AbsolutePanel {
 	
     public static final int TILE_HEIGHT = 20;
     public static final int TILE_WIDTH = 20;
-    private static final int TICKER_TIME = 50;
+    private static final int TICKER_TIME = 75;
     
     private List<Sprite> sprites = new ArrayList<Sprite>();
     private List<Sprite> toAdd = new ArrayList<Sprite>();

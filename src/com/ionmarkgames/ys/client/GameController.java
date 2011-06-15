@@ -25,7 +25,7 @@ public class GameController {
 	private EnemyFactory enemyFactory;
 	
 	private int playerPower = 1;
-	private int playerRange = 2;
+	private int playerRange = 1;
 	private int playerHealth = 1;
 	
 	private static final String[] intros = new String[] {

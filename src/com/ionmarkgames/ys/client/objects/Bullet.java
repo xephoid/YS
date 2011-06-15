@@ -16,10 +16,7 @@ public class Bullet extends Sprite {
     
     @Override
     public void act() {
-    	if (this.panel.hasEnemy(gridX(), gridY())) {
-        	this.panel.visit(this, gridX(), gridY());
-        	this.panel.removeSprite(this);
-        	// TODO: check surounding tiles and calculate distance...
+    	if (this.collide(gridX(), gridY())) {
         	return;
         }
     	
@@ -31,18 +28,30 @@ public class Bullet extends Sprite {
 		
         switch(this.direction) {
             case DOWN:
+                if (this.collide(gridX(), gridY() - 1)) {
+                	return;
+                }
                 deltaY = speed;
                 futureGridY = gridY() + 1;
                 break;
             case UP:
+            	if (this.collide(gridX(), gridY() + 1)) {
+                	return;
+                }
                 deltaY = -speed;
                 futureGridY = gridY() - 1;
                 break;
             case RIGHT:
+            	if (this.collide(gridX() - 1, gridY())) {
+                	return;
+                }
                 deltaX = speed;
                 futureGridX = gridX() + 1;
                 break;
             case LEFT:
+            	if (this.collide(gridX() + 1, gridY())) {
+                	return;
+                }
                 deltaX = -speed;
                 futureGridX = gridX() - 1;
                 break;
@@ -59,6 +68,15 @@ public class Bullet extends Sprite {
 		} else {
 			this.setLocation(getX() + deltaX, getY() + deltaY);
 		}
+    }
+    
+    public boolean collide(int x, int y) {
+    	if (this.panel.hasEnemy(x, y)) {
+        	this.panel.visit(this, x, y);
+        	this.panel.removeSprite(this);
+        	return true;
+        }
+    	return false;
     }
 
     @Override

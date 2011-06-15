@@ -9,6 +9,8 @@ public class Spider extends Enemy {
 	private int homeX;
 	private int homeY;
 	
+	private int wander = 0;
+	
 	public Spider(YSPanel panel, You player) {
 		super(panel, player, "/images/spider.gif");
 		
@@ -21,10 +23,16 @@ public class Spider extends Enemy {
 	
 	@Override
 	public void act() {
-		if ((player.getX() == this.getX() || player.getY() == this.getY())) {
+		if (wander > 0) {
+			wander--;
+			this.move(direction);
+		} else if ((player.getX() == this.getX() || player.getY() == this.getY())) {
 			this.moveTowardsTarget(player.getX(), player.getY());
-		} else {
+		} else if (this.getX() != homeX && this.getY() != homeY) {
 			this.moveTowardsTarget(homeX, homeY);
+		} else {
+			wander = 10;
+			this.direction = this.getRandomDirection();
 		}
 	}
 }

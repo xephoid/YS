@@ -1,5 +1,6 @@
 package com.ionmarkgames.ys.client.objects;
 
+
 import com.ionmarkgames.ys.client.YSPanel;
 
 public abstract class Enemy extends Sprite {
@@ -171,6 +172,9 @@ public abstract class Enemy extends Sprite {
     				this.setLocation(getX() - speed, getY());
     			}
     			break;
+    		case NONE:
+    		default:
+    			return false;
     	}
     	return true;
     }
@@ -187,6 +191,22 @@ public abstract class Enemy extends Sprite {
     		default:
     			return GameDir.LEFT;
     	}
+    }
+    
+    public GameDir getPlayerDirection() {
+    	if (player.getX() > this.getX() && panel.passable(gridX() + 1, gridY())) {
+    		return GameDir.RIGHT;
+    	}
+    	if (player.getY() < this.getY() && panel.passable(gridX(), gridY() - 1)) {
+    		return GameDir.UP;
+    	}
+    	if (player.getX() < this.getX() && panel.passable(gridX() - 1, gridY())) {
+    		return GameDir.LEFT;
+    	}
+    	if (player.getY() > this.getY() && panel.passable(gridX(), gridY() + 1)) {
+    		return GameDir.DOWN;
+    	}
+    	return GameDir.NONE;
     }
 
     public boolean isBullet() {

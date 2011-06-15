@@ -5,8 +5,8 @@ import com.ionmarkgames.ys.client.objects.You;
 import com.ionmarkgames.ys.client.objects.enemies.Bug;
 import com.ionmarkgames.ys.client.objects.enemies.Clown;
 import com.ionmarkgames.ys.client.objects.enemies.Coin;
+import com.ionmarkgames.ys.client.objects.enemies.EasyGhost;
 import com.ionmarkgames.ys.client.objects.enemies.Failure;
-import com.ionmarkgames.ys.client.objects.enemies.Ghost;
 import com.ionmarkgames.ys.client.objects.enemies.Lips;
 import com.ionmarkgames.ys.client.objects.enemies.Mic;
 import com.ionmarkgames.ys.client.objects.enemies.Person;
@@ -33,7 +33,7 @@ public class EnemyFactory {
 			case 1: // ophidiophobia
 				return new Snake(panel, player);
 			case 2: // phasmophobia
-				return new Ghost(panel, player);
+				return new EasyGhost(panel, player);
 			case 3: // arachnophobia
 				return new Spider(panel, player);
 			case 4: // coulrophobia
